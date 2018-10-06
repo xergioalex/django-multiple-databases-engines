@@ -1,0 +1,54 @@
+[
+  {
+    "model":"domain.landlord",
+    "pk":1,
+    "fields":{
+      "name":"Landlord 1",
+      "lastname":"Lastname 1",
+      "phone":"2342342",
+      "email":"land@gmail.com",
+      "account_bank":"account_bank",
+      "account_number":"account_number",
+      "account_type":1
+    }
+  },
+  {
+    "model":"domain.landlord",
+    "pk":2,
+    "fields":{
+      "name":"Landlord 2",
+      "lastname":"Lastname 2",
+      "phone":"2342342",
+      "email":"land2@gmail.com",
+      "account_bank":"account_bank2",
+      "account_number":"account_number2",
+      "account_type":1
+    }
+  },
+  {
+    "model":"domain.landlord",
+    "pk":3,
+    "fields":{
+      "name":"Landlord 3",
+      "lastname":"Lastname 3",
+      "phone":"2342342",
+      "email":"land3@gmail.com",
+      "account_bank":"account_bank3",
+      "account_number":"account_number3",
+      "account_type":1
+    }
+  },
+  {
+    "model":"domain.landlord",
+    "pk":4,
+    "fields":{
+      "name":"Landlord 4",
+      "lastname":"Lastname 4",
+      "phone":"2442442",
+      "email":"land4@gmail.com",
+      "account_bank":"account_bank4",
+      "account_number":"account_number4",
+      "account_type":1
+    }
+  }
+]

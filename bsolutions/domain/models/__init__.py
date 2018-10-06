@@ -1,0 +1,2 @@
+from .beacon import Beacon
+
