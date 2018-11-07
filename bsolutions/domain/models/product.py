@@ -1,4 +1,9 @@
 from django.db import models
+import factory
+import factory.django
+import factory.fuzzy
+
+from .product_type import TipoProductoFactory
 
 
 class Producto(models.Model):
@@ -14,3 +19,13 @@ class Producto(models.Model):
 
     def __str__(self):
         return '%s' % (self.nombre)
+
+
+class ProductoFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Producto
+
+    nombre = factory.Faker('name')
+    referencia = factory.Faker('email')
+    precio = factory.Faker('pyfloat')
+    tipoProducto = factory.SubFactory(TipoProductoFactory)

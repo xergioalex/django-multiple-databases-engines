@@ -1,5 +1,12 @@
 from django.db import models
 
+import factory
+import factory.django
+import factory.fuzzy
+
+from .beacon import BeaconFactory
+from .product import ProductoFactory
+
 
 class Notificacion(models.Model):
     # notifications
@@ -14,3 +21,12 @@ class Notificacion(models.Model):
 
     def __str__(self):
         return '%s' % self.mensaje
+
+
+class NotificacionFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Notificacion
+
+    mensaje = factory.Faker('text', max_nb_chars=100)
+    producto = factory.SubFactory(ProductoFactory)
+    beacon = factory.SubFactory(BeaconFactory)

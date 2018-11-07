@@ -1,4 +1,7 @@
 from django.db import models
+import factory
+import factory.django
+import factory.fuzzy
 
 
 class TipoProducto(models.Model):
@@ -12,3 +15,10 @@ class TipoProducto(models.Model):
 
     def __str__(self):
         return '%s' % self.nombre
+
+
+class TipoProductoFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = TipoProducto
+
+    nombre = factory.Faker('word')

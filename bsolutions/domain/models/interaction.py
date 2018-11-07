@@ -1,5 +1,12 @@
 from django.db import models
 
+import factory
+import factory.django
+import factory.fuzzy
+
+from .notifications import NotificacionFactory
+from .profile import ClienteFactory
+
 
 class Interaccion(models.Model):
     id = models.AutoField(primary_key=True)
@@ -15,8 +22,12 @@ class Interaccion(models.Model):
     def __str__(self):
         return '%s' % (self.fecha)
 
-# class FooFactory(factory.Factory):
-#     class Meta:
-#         model = Foo
-#
-#     bar = factory.RelatedFactory(BarFactory)  # Not BarFactory()
+
+class InteraccionFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Interaccion
+
+    cliente = factory.SubFactory(ClienteFactory)
+    notificacion = factory.SubFactory(NotificacionFactory)
+    fecha = factory.Faker('date_time_this_year')
+    materializado = factory.Faker('boolean')
