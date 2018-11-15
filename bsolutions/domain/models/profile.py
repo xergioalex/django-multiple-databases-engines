@@ -13,12 +13,19 @@ class Cliente(models.Model):
         (4, 'Cédula de extranjería'),
     )
 
+    GENEROS = (
+        ('F', 'Femenino'),
+        ('M', 'Masculino'),
+    )
+
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, null=False)
     nombre = models.CharField(max_length=45, null=False)
     correo = models.EmailField(max_length=45, null=False)
     documento = models.CharField(max_length=20, null=False)
-    tipoDocumento = models.IntegerField(null=False, choices=TIPOS_DOCUMENTOS)
+    tipoDocumento = models.IntegerField(choices=TIPOS_DOCUMENTOS, null=False)
+    genero = models.CharField(max_length=1, choices=GENEROS, null=True)
+    edad = models.PositiveIntegerField(null=False)
     direccion = models.CharField(max_length=80, null=True)
     telefono = models.CharField(max_length=20, null=True)
 
@@ -30,6 +37,7 @@ class Cliente(models.Model):
 
 
 DOCUMENTOS_IDS = [x[0] for x in Cliente.TIPOS_DOCUMENTOS]
+GENEROS_IDS = [x[0] for x in Cliente.GENEROS]
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -56,5 +64,7 @@ class ClienteFactory(factory.django.DjangoModelFactory):
     correo = factory.Faker('email')
     documento = factory.Faker('itin')
     tipoDocumento = factory.fuzzy.FuzzyChoice(DOCUMENTOS_IDS)
+    genero = factory.fuzzy.FuzzyChoice(GENEROS_IDS)
+    edad = factory.fuzzy.FuzzyInteger(1, 100)
     direccion = factory.Faker('address')
     telefono = factory.Faker('phone_number')
