@@ -1,0 +1,55 @@
+{
+  "beaconLogs": {
+    "idBeacon": 267,
+    "interaccion": {
+      "fecha": "shsj",
+      "user": {
+        "idUser": "djkdjk",
+        "user": "djkdjk",
+        "nombre": "djkdjk",
+        "correo": "djkdjk",
+        "documento": "djkdjk",
+        "tipoDocumento": "djkdjk",
+        "direccion": "djkdjk",
+        "telefono": "djkdjk"
+
+      },
+      "producto": {
+        "idProducto": "",
+        "nombre": "",
+        "referencia": "",
+        "precio": "",
+        "tipoProducto": ""
+      }
+    },
+    "payload": {
+      "geolocalizacion": "djksjs",
+      "bluetoothName": "sjsk",
+      "mensaje": "hfjd",
+      "UUID": 23233,
+      "bateria": 23782,
+      "interval": 23
+    }
+  },
+
+  "socialUserMedia": {
+    "userId": 233,
+    "socialContext": {
+      "id": 2322,
+      "address": "",
+      "age_range": "",
+      "birthday": "",
+      "context": "",
+      "cover": "",
+      "profile_pic": "",
+      "email": "",
+      "employee_number": "",
+      "gender": "",
+      "hometown": "",
+      "languages": [],
+      "location": "",
+      "religion": "",
+      "sports": []
+    }
+  }
+}
