@@ -17,7 +17,6 @@ class Compra(models.Model):
     id = models.AutoField(primary_key=True)
     cliente = models.ForeignKey('Cliente', db_column='idCliente', on_delete=models.CASCADE, null=False)
     fecha = models.DateTimeField(auto_now_add=True, null=False)
-    costo = models.IntegerField(null=False)
     medioPago = models.IntegerField(null=False, choices=MEDIO_PAGO)
     descuento = models.FloatField(default=0.0, null=True)
 
@@ -33,7 +32,6 @@ class CompraProducto(models.Model):
     id = models.AutoField(primary_key=True)
     compra = models.ForeignKey('Compra', db_column='idCompra', on_delete=models.CASCADE, null=False)
     producto = models.ForeignKey('Producto', db_column='idProducto', on_delete=models.CASCADE, null=False)
-    costo = models.IntegerField(null=False)
     cantidad = models.PositiveIntegerField(default=1, null=False)
     descuento = models.FloatField(default=0.0, null=True)
 
@@ -55,7 +53,6 @@ class CompraFactory(factory.django.DjangoModelFactory):
     cliente = factory.SubFactory(ClienteFactory)
     fecha = factory.Faker('date_time_this_year')
     medioPago = factory.fuzzy.FuzzyChoice(TIPO_PAGO_IDS)
-    costo = factory.fuzzy.FuzzyInteger(1)
     descuento = factory.fuzzy.FuzzyFloat(0, 100, precision=2)
 
 
@@ -65,6 +62,5 @@ class CompraProductoFactory(factory.django.DjangoModelFactory):
 
     compra = factory.SubFactory(CompraFactory)
     producto = factory.SubFactory(ProductoFactory)
-    costo = factory.fuzzy.FuzzyInteger(1)
     cantidad = factory.fuzzy.FuzzyInteger(1, 200)
     descuento = factory.fuzzy.FuzzyFloat(0, 100, precision=2)

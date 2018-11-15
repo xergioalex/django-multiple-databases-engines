@@ -11,6 +11,7 @@ class Producto(models.Model):
     nombre = models.CharField(max_length=45, null=False)
     referencia = models.CharField(max_length=45, null=False)
     precio = models.FloatField(null=False)
+    costo = models.FloatField(null=False)
     tipoProducto = models.ForeignKey('TipoProducto', db_column='idTipoProducto', on_delete=models.CASCADE, null=False)
 
     class Meta:
@@ -28,4 +29,5 @@ class ProductoFactory(factory.django.DjangoModelFactory):
     nombre = factory.Faker('name')
     referencia = factory.Faker('email')
     precio = factory.Faker('pyfloat')
+    costo = factory.fuzzy.FuzzyFloat(1, precision=2)
     tipoProducto = factory.SubFactory(TipoProductoFactory)
