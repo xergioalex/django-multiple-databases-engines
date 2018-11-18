@@ -21,6 +21,8 @@ services:
     build:
       context: ../../
       dockerfile: ./docker/production/django/Dockerfile.statics
+     depends_on:
+     - redis
     env_file:
       - django/.env
       - postgres/.env
