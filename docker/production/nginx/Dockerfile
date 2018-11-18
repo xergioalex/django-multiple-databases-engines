@@ -8,8 +8,8 @@ RUN mkdir -p /etc/nginx/logs && \
 	touch /etc/nginx/logs/site.error
 
 # Copy custom configuration files
-COPY docker/dev/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY docker/dev/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY docker/production/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY docker/production/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy Staticfiles of Django
 # COPY ./staticfiles /opt/staticfiles
