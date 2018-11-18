@@ -3,6 +3,15 @@ version: '3'
 volumes:
   local_postgres_data: {}
   local_postgres_data_backups: {}
+  db_mysql_data: {}
+  db_mariadb_data: {}
+  db_sqlserver_data: {}
+  db_mongodb_data: {}
+  db_couchdb_data: {}
+  db_couchdb_config: {}
+  db_cassandra_data: {}
+  db_neo4j_data: {}
+  pgadmindata: {}
   nginx_logs: {}
   letsencrypt_certbot: {}
   letsencrypt_logs: {}
