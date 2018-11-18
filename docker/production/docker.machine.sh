@@ -59,6 +59,8 @@ if [[ "$1" == "machine.create" ]]; then
     fi
 elif [[ "$1" == "build.app" ]]; then
     utils.printer "Building services"
+    docker-compose -f docker-compose.build.yaml build statics
+    docker-compose -f docker-compose.build.yaml run statics
     docker-compose -f docker-compose.build.yaml build django
 elif [[ "$1" == "build.nginx" ]]; then
     if [[ "$2" == "secure" ]]; then

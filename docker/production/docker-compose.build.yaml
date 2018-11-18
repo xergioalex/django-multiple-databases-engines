@@ -16,3 +16,14 @@ services:
       dockerfile: ./docker/production/nginx/Dockerfile
     env_file:
       - nginx/.env
+
+  statics:
+    build:
+      context: ../../
+      dockerfile: ./docker/production/django/Dockerfile.statics
+    env_file:
+      - django/.env
+      - postgres/.env
+    volumes:
+      - ../..:/app
+    command: sh -c 'python /app/manage.py collectstatic --noinput && chown -R "${SERVICE_PERMISSIONS}" /app'

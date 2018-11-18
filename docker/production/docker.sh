@@ -41,6 +41,8 @@ elif [[ "$1" == "push" ]]; then
     docker tag "${COMPOSE_PROJECT_NAME}_${SERVICE_NGINX_BUILD_NAME}" "${CONTAINER_REGISTRY_PREFIX}/${CONTAINER_REGISTRY_REPOSITORY_NAME}:${COMPOSE_PROJECT_NAME}-${SERVICE_NGINX_BUILD_NAME}-${SERVICE_NGINX_BUILD_TAG_CALC}"
 elif [[ "$1" == "deploy" ]]; then
     utils.printer "Deploying services"
+    docker-compose -f docker-compose.build.yaml build statics
+    docker-compose -f docker-compose.build.yaml run statics
     docker-compose up -d django postgres redis celeryworker celerybeat flower
 elif [[ "$1" == "server.renewssl.cerbot" ]]; then
     if [[ "$2" == "secure" ]]; then
