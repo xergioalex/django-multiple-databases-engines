@@ -39,7 +39,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///bsolutions'),
+    # 'default': env.db('DATABASE_URL', default='postgres:///bsolutions'),
+    'default': {
+        'NAME': 'bsolutions',
+        'ENGINE': 'sqlserver_ado',
+        'HOST': 'sqlserver',
+        'USER': 'bsolutions_user',
+        'PASSWORD': 'bsolutions_password',
+    },
+    'mysql': env.db('DATABASE_URL', default='postgres:///bsolutions'),
     # 'mongodb': env.db('DATABASE_URL', default='postgres:///bsolutions'),
 }
 

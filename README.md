@@ -77,3 +77,8 @@ The following describes each of the parameters::
 # Project scripts
 
 docker-compose -f local.yml run django python3 manage.py populate_database --iteraciones {N}
+
+* To create an **superuser account**, use this command::
+```
+$ python manage.py createsuperuser
+```
