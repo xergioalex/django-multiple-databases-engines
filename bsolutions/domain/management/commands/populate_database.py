@@ -16,7 +16,8 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        for _ in range(options['iteraciones']):
+        for i in range(options['iteraciones']):
             CompraProductoFactory()
             NotificacionFactory()
-            print(f"elementos creados iteracion # {_}")
+            if i % 10000 == 0:
+                print(f"elementos creados iteracion # {i}")
