@@ -44,10 +44,16 @@ class UserFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = User
+        django_get_or_create = ('username',)
+        exclude = ('username_sequence', 'username_generated')
+
+    # Excluded
+    username_sequence = factory.Sequence(lambda n: "user_%d" % n)
+    username_generated = factory.Faker('user_name')
 
     email = factory.Faker('email')
     name = factory.Faker('name')
-    username = factory.Faker('user_name')
+    username = factory.LazyAttribute(lambda p: '{} {}'.format(p.username_sequence, p.username_generated))
     password = factory.Faker('password')
 
     is_superuser = False
@@ -58,7 +64,9 @@ class UserFactory(factory.DjangoModelFactory):
 class ClienteFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Cliente
+        django_get_or_create = ('id',)
 
+    id = factory.fuzzy.FuzzyInteger(0, 100000)
     user = factory.SubFactory(UserFactory)
     nombre = factory.Faker('name')
     correo = factory.Faker('email')

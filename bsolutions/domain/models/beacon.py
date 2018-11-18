@@ -1,6 +1,7 @@
 from django.db import models
 import factory
 import factory.django
+import factory.fuzzy
 
 
 class Beacon(models.Model):
@@ -20,7 +21,9 @@ class Beacon(models.Model):
 class BeaconFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Beacon
+        django_get_or_create = ('id',)
 
+    id = factory.fuzzy.FuzzyInteger(0, 1000)
     referencia = factory.Faker('itin')
     modelo = factory.Faker('zipcode')
     ubicacion = factory.Faker('geo_coordinate')
