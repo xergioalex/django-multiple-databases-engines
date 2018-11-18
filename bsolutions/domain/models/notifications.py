@@ -26,7 +26,9 @@ class Notificacion(models.Model):
 class NotificacionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Notificacion
+        django_get_or_create = ('id',)
 
+    id = factory.fuzzy.FuzzyInteger(0, 100000)
     mensaje = factory.Faker('text', max_nb_chars=100)
     producto = factory.SubFactory(ProductoFactory)
     beacon = factory.SubFactory(BeaconFactory)
