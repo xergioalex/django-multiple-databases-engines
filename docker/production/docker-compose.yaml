@@ -12,23 +12,16 @@ services:
     image: ${CONTAINER_REGISTRY_PREFIX}/${CONTAINER_REGISTRY_REPOSITORY_NAME}:${COMPOSE_PROJECT_NAME}-${SERVICE_DJANGO_BUILD_NAME}-${SERVICE_DJANGO_BUILD_TAG_CALC}
     depends_on:
       - postgres
-      - redis
+      - mysql
+      - sqlserver
+      - oracle
+      - mongodb
+      - couchdb
     env_file:
       - django/.env
       - postgres/.env
     command: /uwsgi.sh
     restart: on-failure
-
-  postgres:
-    image: mdillon/postgis:10-alpine
-    volumes:
-      - local_postgres_data:/var/lib/postgresql/data
-      - local_postgres_data_backups:/backups
-    env_file:
-      - postgres/.env
-    ports:
-      - "${SERVICE_POSTGRES_PORT}"
-    restart: always
 
   nginx:
     image: ${CONTAINER_REGISTRY_PREFIX}/${CONTAINER_REGISTRY_REPOSITORY_NAME}:${COMPOSE_PROJECT_NAME}-${SERVICE_NGINX_BUILD_NAME}-${SERVICE_NGINX_BUILD_TAG_CALC}
@@ -56,10 +49,6 @@ services:
       - "443:443"
     command: certonly --standalone --expand --non-interactive --agree-tos --email=${SERVICE_CERTBOT_EMAIL} ${SERVICE_CERTBOT_DOMAINS}
 
-  redis:
-    image: redis:3.2
-    restart: always
-
   celeryworker:
     <<: *django
     depends_on:
@@ -85,3 +74,66 @@ services:
     command: /start-flower.sh
     restart: on-failure
 
+  postgres:
+    image: postgres:11.1-alpine
+    volumes:
+      - db_postgres_data:/var/lib/postgresql/data
+      - db_postgres_data_backups:/backups
+    ports:
+      - "5432:5432"
+    env_file:
+      - postgres/.env
+
+  redis:
+    image: redis:3.2
+
+  mysql:
+    image: mysql:8.0.13
+    volumes:
+      - db_mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    env_file:
+      - mysql/.env
+
+  sqlserver:
+    image: exoplatform/sqlserver:2017-CU8
+    volumes:
+      - db_sqlserver_data:/var/opt/mssql
+    ports:
+      - "1433:1433"
+    env_file:
+      - sqlserver/.env
+
+  oracle:
+    image: oraclelinux:7.6
+    volumes:
+      - db_oracle_data:/var/opt/mssql
+    ports:
+      - "1521:1521"
+    env_file:
+      - oracle/.env
+    volumes:
+      - db_oracle_data:/u02
+
+  mongodb:
+    image: mongo:4.0.2
+    working_dir: /opt/mongodb
+    env_file:
+      - mongo/.env
+    volumes:
+      - db_mongodb_data:/opt/mongodb
+    command: sh -c 'mkdir -p /opt/mongodb && mongod --port 27017 --bind_ip 0.0.0.0 --dbpath /opt/mongodb'
+    ports:
+      - "27017:27017"
+
+  couchdb:
+    image: couchdb:2.2.0
+    working_dir: /opt/mongodb
+    env_file:
+      - couchdb/.env
+    volumes:
+      - db_couchdb_data:/opt/couchdb/data
+      - db_couchdb_config:/opt/couchdb/etc
+    ports:
+      - "5984:5984"
