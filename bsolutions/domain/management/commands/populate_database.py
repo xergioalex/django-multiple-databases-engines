@@ -26,8 +26,11 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        for i in range(options['iteraciones']):
-            CompraProductoFactory()
-            NotificacionFactory()
-            if i % 10000 == 0:
-                print(f"elementos creados iteracion # {i}")
+
+        with DBAwareFactory(CompraProductoFactory, options['db']) as compra_producto_factory_on_specifydb, \
+             DBAwareFactory(NotificacionFactory, options['db']) as notificacion_factory_on_specifydb:
+            for _ in range(options['iteraciones']):
+                compra_producto_factory_on_specifydb()
+                notificacion_factory_on_specifydb()
+                if _ % 10000 == 0:
+                    print(f"elementos creados iteracion # {_}")
