@@ -1,0 +1,59 @@
+version: '3'
+
+volumes:
+  local_postgres_data: {}
+  local_postgres_data_backups: {}
+
+services:
+  django: &django
+    build:
+      context: ../../
+      dockerfile: ./docker/local/django/Dockerfile
+    depends_on:
+      - postgres
+    volumes:
+      - ./../..:/app
+    env_file:
+      - django/.env
+      - postgres/.env
+    ports:
+      - "8000:8000"
+    command: /start.sh
+
+  celeryworker:
+    <<: *django
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celeryworker.sh
+
+  celerybeat:
+    <<: *django
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celerybeat.sh
+
+  flower:
+    <<: *django
+    ports:
+    - "5555:5555"
+    depends_on:
+      - redis
+    command: /start-flower.sh
+    restart: on-failure
+
+  postgres:
+    image: mdillon/postgis:10-alpine
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+      - local_postgres_data_backups:/backups
+    ports:
+      - "5432:5432"
+    env_file:
+      - postgres/.env
+
+  redis:
+    image: redis:3.2
