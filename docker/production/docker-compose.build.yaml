@@ -4,7 +4,7 @@ services:
   django: &django
     build:
       context: ../../
-      dockerfile: ./docker/dev/django/Dockerfile
+      dockerfile: ./docker/production/django/Dockerfile
     env_file:
       - django/.env
       - postgres/.env
@@ -13,6 +13,6 @@ services:
   nginx:
     build:
       context: ../../
-      dockerfile: ./docker/dev/nginx/Dockerfile
+      dockerfile: ./docker/production/nginx/Dockerfile
     env_file:
       - nginx/.env
