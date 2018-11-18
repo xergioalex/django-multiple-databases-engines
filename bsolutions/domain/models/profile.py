@@ -75,4 +75,4 @@ class ClienteFactory(factory.django.DjangoModelFactory):
     genero = factory.fuzzy.FuzzyChoice(GENEROS_IDS)
     edad = factory.fuzzy.FuzzyInteger(1, 100)
     direccion = factory.Faker('address')
-    telefono = factory.Faker('phone_number')
+    telefono = factory.Faker('msisdn')

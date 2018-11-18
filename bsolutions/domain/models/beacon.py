@@ -2,7 +2,8 @@ from django.db import models
 import factory
 import factory.django
 import factory.fuzzy
-
+from faker import Factory as FakerFactory
+faker = FakerFactory.create()
 
 class Beacon(models.Model):
     id = models.AutoField(primary_key=True)
@@ -18,7 +19,15 @@ class Beacon(models.Model):
         return '%s' % (self.referencia)
 
 
+def getCoordinate():
+    latlng = faker.latlng()
+    lat = float(latlng[0]).__str__()
+    lng = float(latlng[1]).__str__()
+
+    return lat + ', ' + lng
+
 class BeaconFactory(factory.django.DjangoModelFactory):
+
     class Meta:
         model = Beacon
         django_get_or_create = ('id',)
@@ -26,4 +35,4 @@ class BeaconFactory(factory.django.DjangoModelFactory):
     id = factory.fuzzy.FuzzyInteger(1, 1000)
     referencia = factory.Faker('itin')
     modelo = factory.Faker('zipcode')
-    ubicacion = factory.Faker('geo_coordinate')
+    ubicacion = factory.LazyAttribute(lambda n: getCoordinate())
