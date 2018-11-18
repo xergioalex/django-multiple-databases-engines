@@ -2,9 +2,9 @@ server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
     ssl on;
-    ssl_certificate /etc/letsencrypt/live/bsolutions.xergioale.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/bsolutions.xergioale.com/privkey.pem;
-    server_name bsolutions.xergioale.com;
+    ssl_certificate /etc/letsencrypt/live/bsolutions.xergioalex.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bsolutions.xergioalex.com/privkey.pem;
+    server_name bsolutions.xergioalex.com;
     charset     utf-8;
 
     access_log /etc/nginx/logs/site.access;
@@ -43,8 +43,8 @@ server {
 
 server {
     listen 80;
-    server_name bsolutions.xergioale.com;
-    rewrite ^/(.*)  https://bsolutions.xergioale.com/$1 permanent;
+    server_name bsolutions.xergioalex.com;
+    rewrite ^/(.*)  https://bsolutions.xergioalex.com/$1 permanent;
 }
 
 
@@ -52,8 +52,8 @@ server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
     ssl on;
-    ssl_certificate /etc/letsencrypt/live/bsolutions.xergioale.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/bsolutions.xergioale.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/bsolutions.xergioalex.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bsolutions.xergioalex.com/privkey.pem;
     server_name bsolutionsdev.xergioalex.com;
     charset     utf-8;
 

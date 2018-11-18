@@ -4,7 +4,7 @@
 . ./../utils.sh
 
 # Create envs vars if don't exist
-ENV_FILES=(".env" "django/.env" "postgres/.env" "mysql/.env" "sqlserver/.env" "oracle/.env" "mongo/.env" "couchdb/.env")
+ENV_FILES=(".env" "django/.env" "postgres/.env" "mysql/.env" "sqlserver/.env" "mongo/.env" "couchdb/.env" "cassandra/.env" "neo4j/.env")
 utils.check_envs_files "${ENV_FILES[@]}"
 
 # Load environment vars, to use from console, run follow command:

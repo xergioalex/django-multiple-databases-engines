@@ -13,10 +13,12 @@ services:
     depends_on:
       - postgres
       - mysql
+      - mariadb
       - sqlserver
-      - oracle
       - mongodb
       - couchdb
+      - cassandra
+      - neo4j
     env_file:
       - django/.env
       - postgres/.env
@@ -80,19 +82,25 @@ services:
       - db_postgres_data:/var/lib/postgresql/data
       - db_postgres_data_backups:/backups
     ports:
-      - "5432:5432"
+      - "4000:5432"
     env_file:
       - postgres/.env
 
-  redis:
-    image: redis:3.2
+  mariadb:
+    image: mariadb:10.4.0
+    volumes:
+      - db_mariadb_data:/var/lib/mysql
+    ports:
+      - "4001:3306"
+    env_file:
+      - mysql/.env
 
   mysql:
     image: mysql:8.0.13
     volumes:
       - db_mysql_data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "4002:3306"
     env_file:
       - mysql/.env
 
@@ -101,20 +109,12 @@ services:
     volumes:
       - db_sqlserver_data:/var/opt/mssql
     ports:
-      - "1433:1433"
+      - "4003:1433"
     env_file:
       - sqlserver/.env
 
-  oracle:
-    image: oraclelinux:7.6
-    volumes:
-      - db_oracle_data:/var/opt/mssql
-    ports:
-      - "1521:1521"
-    env_file:
-      - oracle/.env
-    volumes:
-      - db_oracle_data:/u02
+  redis:
+    image: redis:3.2
 
   mongodb:
     image: mongo:4.0.2
@@ -125,15 +125,32 @@ services:
       - db_mongodb_data:/opt/mongodb
     command: sh -c 'mkdir -p /opt/mongodb && mongod --port 27017 --bind_ip 0.0.0.0 --dbpath /opt/mongodb'
     ports:
-      - "27017:27017"
+      - "4004:27017"
 
   couchdb:
     image: couchdb:2.2.0
-    working_dir: /opt/mongodb
     env_file:
       - couchdb/.env
     volumes:
       - db_couchdb_data:/opt/couchdb/data
       - db_couchdb_config:/opt/couchdb/etc
     ports:
-      - "5984:5984"
+      - "4005:5984"
+
+  cassandra:
+    image: cassandra:2.1.20
+    env_file:
+      - cassandra/.env
+    volumes:
+      - db_cassandra_data:/var/lib/cassandra
+    ports:
+      - "4006:7000"
+
+  neo4j:
+    image: neo4j:3.4.9
+    env_file:
+      - neo4j/.env
+    volumes:
+      - db_neo4j_data:/data
+    ports:
+      - "4007:7474"

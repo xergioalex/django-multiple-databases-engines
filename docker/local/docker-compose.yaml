@@ -78,7 +78,7 @@ services:
     ports:
       - "4001:3306"
     env_file:
-      - mariadb/.env
+      - mysql/.env
 
   mysql:
     image: mysql:8.0.13
