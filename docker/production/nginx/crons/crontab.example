@@ -1,0 +1,1 @@
+0 0 1 * * /opt/crons/COMPOSE_PROJECT_NAME/renewssl.sh >> /opt/crons/COMPOSE_PROJECT_NAME/renewssl.logs 2>&1

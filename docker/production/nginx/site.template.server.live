@@ -1,0 +1,77 @@
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/bsolutions.xergioale.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bsolutions.xergioale.com/privkey.pem;
+    server_name bsolutions.xergioale.com;
+    charset     utf-8;
+
+    access_log /etc/nginx/logs/site.access;
+    error_log /etc/nginx/logs/site.error error;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass django:8000;
+        proxy_redirect     off;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Host $server_name;
+        proxy_set_header   X-Frame-Options "SAMEORIGIN";
+    }
+
+    # max upload size
+    client_max_body_size 75M;   # adjust to taste
+
+    # Django media
+    location /media  {
+        alias /opt/bsolutions-media/media;  # your Django project's media files - amend as required
+    }
+
+    location /static {
+        add_header Access-Control-Allow-Origin "*";
+        add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS';
+        add_header Cache-Control "max-age=31536000";
+        access_log off;
+        alias /opt/staticfiles; # your Django project's static files - amend as required
+    }
+
+}
+
+server {
+    listen 80;
+    server_name bsolutions.xergioale.com;
+    rewrite ^/(.*)  https://bsolutions.xergioale.com/$1 permanent;
+}
+
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/bsolutions.xergioale.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bsolutions.xergioale.com/privkey.pem;
+    server_name bsolutions.xergioalex.com;
+    charset     utf-8;
+
+    access_log /etc/nginx/logs/site.access;
+    error_log /etc/nginx/logs/site.error error;
+
+    location / {
+        proxy_pass http://flower:5555;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}
+
+server {
+    listen 80;
+    server_name bsolutions.xergioalex.com;
+    rewrite ^/(.*)  https://bsolutions.xergioalex.com/$1 permanent;
+}
