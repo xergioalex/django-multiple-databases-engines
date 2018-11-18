@@ -80,8 +80,8 @@ INSTALLED_APPS += ['storages']  # noqa F405
 # STATIC
 # ------------------------
 
-STATICFILES_STORAGE = 'config.settings.production.StaticRootS3Boto3Storage'
-STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
+# STATICFILES_STORAGE = 'config.settings.production.StaticRootS3Boto3Storage'
+STATIC_URL = '/static/'
 
 # MEDIA
 # ------------------------------------------------------------------------------
