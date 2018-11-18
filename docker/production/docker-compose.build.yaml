@@ -29,3 +29,6 @@ services:
     volumes:
       - ../..:/app
     command: sh -c 'python /app/manage.py collectstatic --noinput && chown -R "${SERVICE_PERMISSIONS}" /app'
+
+  redis:
+    image: redis:3.2
