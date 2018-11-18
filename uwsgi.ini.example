@@ -1,0 +1,13 @@
+[uwsgi]
+chdir=/app/
+module=config.wsgi:application
+chmod-socket=666
+env=DJANGO_SETTINGS_MODULE=config.settings.production
+socket=0.0.0.0:8000
+master=true
+processes=4
+enable-threads = true
+single-interpreter = true
+buffer-size=8192
+ignore-sigpipe=true
+ignore-write-errors=true
