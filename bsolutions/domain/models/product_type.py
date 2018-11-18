@@ -22,5 +22,5 @@ class TipoProductoFactory(factory.django.DjangoModelFactory):
         model = TipoProducto
         django_get_or_create = ('id',)
 
-    id = factory.fuzzy.FuzzyInteger(0, 1000)
+    id = factory.fuzzy.FuzzyInteger(1, 1000)
     nombre = factory.Faker('word')

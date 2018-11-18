@@ -27,7 +27,7 @@ class ProductoFactory(factory.django.DjangoModelFactory):
         model = Producto
         django_get_or_create = ('id',)
 
-    id = factory.fuzzy.FuzzyInteger(0, 10000)
+    id = factory.fuzzy.FuzzyInteger(1, 10000)
     nombre = factory.Faker('name')
     referencia = factory.Faker('email')
     precio = factory.Faker('pyfloat')
