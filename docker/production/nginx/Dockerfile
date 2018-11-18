@@ -12,7 +12,7 @@ COPY docker/production/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY docker/production/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy Staticfiles of Django
-# COPY ./staticfiles /opt/staticfiles
+COPY ./staticfiles /opt/staticfiles
 
 # Run nginx
 CMD nginx -g 'daemon off;'
