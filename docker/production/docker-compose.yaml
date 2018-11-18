@@ -1,8 +1,8 @@
 version: '3'
 
 volumes:
-  local_postgres_data: {}
-  local_postgres_data_backups: {}
+  db_postgres_data: {}
+  db_postgres_data_backups: {}
   db_mysql_data: {}
   db_mariadb_data: {}
   db_sqlserver_data: {}
