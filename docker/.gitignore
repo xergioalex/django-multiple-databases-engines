@@ -1,15 +1,4 @@
-production/.env
-production/django/.env
-production/nginx/.env
-production/nginx/crontab
-production/nginx/renewssl.sh
-production/nginx/site.template
-production/nginx/site.template.ssl
-production/nginx/crons/crontab
-production/nginx/crons/renewssl.sh
-production/pgadmin/.env
-production/postgres/.env
-local/.env
-local/django/.env
-local/pgadmin/.env
-local/postgres/.env
+*.env
+# local/django/.env
+# local/pgadmin/.env
+# local/postgres/.env
