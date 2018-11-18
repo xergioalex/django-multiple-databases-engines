@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED 1
 RUN groupadd -r django \
     && useradd -r -g django django
 
-RUN apt-get update && apt-get install unixodbc unixodbc-dev
+RUN apt-get update -y && apt-get install unixodbc unixodbc-dev -y
 
 
 # Install uWSGI
