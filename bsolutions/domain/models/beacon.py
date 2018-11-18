@@ -23,7 +23,7 @@ class BeaconFactory(factory.django.DjangoModelFactory):
         model = Beacon
         django_get_or_create = ('id',)
 
-    id = factory.fuzzy.FuzzyInteger(0, 1000)
+    id = factory.fuzzy.FuzzyInteger(1, 1000)
     referencia = factory.Faker('itin')
     modelo = factory.Faker('zipcode')
     ubicacion = factory.Faker('geo_coordinate')

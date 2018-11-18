@@ -66,7 +66,7 @@ class ClienteFactory(factory.django.DjangoModelFactory):
         model = Cliente
         django_get_or_create = ('id',)
 
-    id = factory.fuzzy.FuzzyInteger(0, 100000)
+    id = factory.fuzzy.FuzzyInteger(1, 100000)
     user = factory.SubFactory(UserFactory)
     nombre = factory.Faker('name')
     correo = factory.Faker('email')

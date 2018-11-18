@@ -28,7 +28,7 @@ class NotificacionFactory(factory.django.DjangoModelFactory):
         model = Notificacion
         django_get_or_create = ('id',)
 
-    id = factory.fuzzy.FuzzyInteger(0, 100000)
+    id = factory.fuzzy.FuzzyInteger(1, 100000)
     mensaje = factory.Faker('text', max_nb_chars=100)
     producto = factory.SubFactory(ProductoFactory)
     beacon = factory.SubFactory(BeaconFactory)
