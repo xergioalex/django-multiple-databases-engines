@@ -28,6 +28,7 @@ services:
       - couchdb
       - cassandra
       - neo4j
+      - oracle
     env_file:
       - django/.env
       - postgres/.env
