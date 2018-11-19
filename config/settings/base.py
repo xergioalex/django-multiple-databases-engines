@@ -46,9 +46,9 @@ DATABASES = {
         'HOST': 'sqlserver',
         'USER': 'bsolutions_user',
         'PASSWORD': 'bsolutions_password',
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-        },
+        # 'OPTIONS': {
+        #     'driver': 'ODBC Driver 17 for SQL Server',
+        # },
     },
     # 'mysql': env.db('DATABASE_URL', default='postgres:///bsolutions'),
     # 'mongodb': env.db('DATABASE_URL', default='postgres:///bsolutions'),
