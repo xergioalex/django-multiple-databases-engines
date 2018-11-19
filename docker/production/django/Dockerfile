@@ -27,7 +27,9 @@ RUN pip3 install uwsgi
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements /requirements
-RUN pip install --no-cache-dir -r /requirements/production.txt \
+RUN pip install --no-cache-dir -r /requirements/production.txt
+
+RUN pip install --no-cache-dir -r /requirements/extra.txt \
     && rm -rf /requirements
 
 RUN cp /etc/odbcinst.ini /etc/odbc.ini
