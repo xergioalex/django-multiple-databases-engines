@@ -50,6 +50,7 @@ RUN chown django /start-flower.sh
 
 COPY . /app
 
+RUN chown django /opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.2.so.0.1
 RUN chown -R django /app
 
 USER django
