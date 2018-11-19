@@ -18,7 +18,7 @@ RUN apt-get install libaio1 libaio-dev -y
 
 RUN mkdir -p /opt/oracle
 COPY ./docker/production/django/instantclient-basic-linux-18.3.0.0.0dbru.zip /opt/oracle/instantclient-basic-linux-18.3.0.0.0dbru.zip
-RUN unzip /opt/oracle/instantclient-basic-linux-18.3.0.0.0dbru.zip
+RUN unzip /opt/oracle/instantclient-basic-linux-18.3.0.0.0dbru.zip -d /opt/oracle
 RUN ln -s /opt/oracle/instantclient_18_3/libclntsh.so.18.1 /opt/oracle/libclntsh.so
 RUN ln -s /opt/oracle/instantclient_18_3/libocci.so.18.1 /opt/oracle/libocci.so
 # run  cd /opt/oracle/instantclient_12_2
