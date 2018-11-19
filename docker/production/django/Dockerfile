@@ -7,6 +7,7 @@ ENV PYTHONUNBUFFERED 1
 RUN groupadd -r django \
     && useradd -r -g django django
 
+RUN apt-get update -y && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get update -y && apt-get install apt-transport-https -y
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | tee /etc/apt/sources.list.d/mssql-tools.list
