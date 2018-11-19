@@ -5,7 +5,8 @@ ENV PYTHONUNBUFFERED 1
 RUN groupadd -r django \
     && useradd -r -g django django
 
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+RUN RUN apt-get update -y && \
+    curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | tee /etc/apt/sources.list.d/mssql-tools.list
 RUN apt-get update -y && apt-get install unixodbc unixodbc-dev -y
 RUN ACCEPT_EULA=Y apt-get install mssql-tools
