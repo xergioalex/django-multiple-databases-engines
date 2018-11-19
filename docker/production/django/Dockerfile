@@ -1,5 +1,7 @@
 FROM python:3.6.7-stretch
 
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND teletype
 ENV PYTHONUNBUFFERED 1
 
 RUN groupadd -r django \
