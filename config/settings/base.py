@@ -52,7 +52,7 @@ DATABASES = {
     },
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'oracle:1521/bsolutions.localhost',
+        'NAME': 'oracle:1521/bsolutions.oracle',
         'PASSWORD': 'bsolutions_password',
         'USER': 'bsolutions_user',
         # 'HOST': 'oracle',
