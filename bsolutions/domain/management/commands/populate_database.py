@@ -32,5 +32,5 @@ class Command(BaseCommand):
             for _ in range(options['iteraciones']):
                 compra_producto_factory_on_specifydb()
                 notificacion_factory_on_specifydb()
-                if _ % 10000 == 0:
-                    print(f"elementos creados iteracion # {_}")
+                print(f"elementos creados iteracion # {_}")
+                # if _ % 10000 == 0:
