@@ -14,6 +14,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
 RUN apt-get update -y && apt-get install unixodbc unixodbc-dev -y
 RUN ACCEPT_EULA=Y apt-get install mssql-tools=14.0.6.0-1 -y
 RUN apt-get install libaio1 libaio-dev -y
+RUN apt-get install unzip -y
 
 
 RUN mkdir -p /opt/oracle
