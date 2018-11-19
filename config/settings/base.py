@@ -40,7 +40,7 @@ USE_TZ = True
 
 DATABASES = {
     'postgres': env.db('DATABASE_URL', default='postgres:///bsolutions'),
-    'sqlserver': {
+    'default': {
         'NAME': 'bsolutions',
         'ENGINE': 'sql_server.pyodbc',
         'HOST': 'sqlserver',
@@ -50,14 +50,14 @@ DATABASES = {
         #     'driver': 'ODBC Driver 17 for SQL Server',
         # },
     },
-    'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'oracle:1521/bsolutions.oracle',
-        'PASSWORD': 'bsolutions_password',
-        'USER': 'bsolutions_user',
-        # 'HOST': 'oracle',
-        # 'PORT': 1699,
-    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.oracle',
+    #     'NAME': 'oracle:1521/bsolutions.oracle',
+    #     'PASSWORD': 'bsolutions_password',
+    #     'USER': 'bsolutions_user',
+    #     # 'HOST': 'oracle',
+    #     # 'PORT': 1699,
+    # },
     # 'default': {
     #     'ENGINE': 'django.db.backends.oracle',
     #     'NAME': 'PDB1',
