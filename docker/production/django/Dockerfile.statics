@@ -2,6 +2,7 @@ FROM python:3.6.7-stretch
 
 ENV PYTHONUNBUFFERED 1
 
+RUN apt-get update -y && apt-get install apt-transport-https -y
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | tee /etc/apt/sources.list.d/mssql-tools.list
 RUN apt-get update -y && apt-get install unixodbc unixodbc-dev -y
