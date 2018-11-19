@@ -50,22 +50,22 @@ DATABASES = {
         #     'driver': 'ODBC Driver 17 for SQL Server',
         # },
     },
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.oracle',
-    #     'NAME': 'oracle:1521/bsolutions',
-    #     'PASSWORD': 'bsolutions_password',
-    #     'USER': 'bsolutions_user',
-    #     # 'HOST': 'oracle',
-    #     # 'PORT': 1699,
-    # },
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'PDB1',
+        'NAME': 'oracle:1521/bsolutions.localhost',
         'PASSWORD': 'bsolutions_password',
         'USER': 'bsolutions_user',
-        'HOST': 'oracle',
-        'PORT': '1521',
-    }
+        # 'HOST': 'oracle',
+        # 'PORT': 1699,
+    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.oracle',
+    #     'NAME': 'PDB1',
+    #     'PASSWORD': 'bsolutions_password',
+    #     'USER': 'bsolutions_user',
+    #     'HOST': 'oracle',
+    #     'PORT': '1521',
+    # }
     # 'mysql': env.db('DATABASE_URL', default='postgres:///bsolutions'),
     # 'mongodb': env.db('DATABASE_URL', default='postgres:///bsolutions'),
 }
