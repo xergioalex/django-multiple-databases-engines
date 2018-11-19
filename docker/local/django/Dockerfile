@@ -5,12 +5,12 @@ ENV PYTHONUNBUFFERED 1
 RUN groupadd -r django \
     && useradd -r -g django django
 
+RUN DEBIAN_FRONTEND=noninteractive apt-get install libssl1.0.0
 RUN apt-get update -y && apt-get install apt-transport-https -y
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | tee /etc/apt/sources.list.d/mssql-tools.list
 RUN apt-get update -y && apt-get install unixodbc unixodbc-dev -y
 RUN ACCEPT_EULA=Y apt-get install mssql-tools -y
-
 
 # Install uWSGI
 RUN pip3 install uwsgi
