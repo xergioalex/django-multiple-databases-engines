@@ -3,6 +3,9 @@ FROM python:3.6.7-stretch
 # ENV DEBIAN_FRONTEND noninteractive
 # ENV DEBIAN_FRONTEND teletype
 # ENV PYTHONUNBUFFERED 1
+ENV ORACLE_HOME=/usr/local/lib/instantclient_18_3
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME
+ENV PATH=$ORACLE_HOME:$PATH
 
 RUN groupadd -r django \
     && useradd -r -g django django
