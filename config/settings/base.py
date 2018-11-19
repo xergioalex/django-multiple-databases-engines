@@ -52,10 +52,11 @@ DATABASES = {
     },
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'bsolutions',
-        'HOST': 'oracle',
+        'NAME': 'oracle:1699/ORCLCDB',
+        'PASSWORD': 'bsolutions_password',
         'USER': 'bsolutions_user',
-        'PASSWORD': 'bsolutions_password'
+        # 'HOST': 'oracle',
+        # 'PORT': 1699,
     },
     # 'mysql': env.db('DATABASE_URL', default='postgres:///bsolutions'),
     # 'mongodb': env.db('DATABASE_URL', default='postgres:///bsolutions'),
