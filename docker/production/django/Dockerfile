@@ -13,7 +13,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
 RUN apt-get update -y && apt-get install unixodbc unixodbc-dev -y
 RUN apt-get remove msodbcsql
 RUN apt-cache madison msodbcsql
-RUN apt-get install msodbcsql=13.1.9.2-1 --yes --force-yes
+RUN apt-get install msodbcsql=13.1.9.2-1 --yes --allow
 RUN apt-cache madison mssql-tools
 RUN ACCEPT_EULA=Y apt-get install mssql-tools=14.0.6.0-1 -y
 RUN apt-mark hold mssql-tools
