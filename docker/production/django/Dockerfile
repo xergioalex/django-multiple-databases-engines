@@ -20,6 +20,7 @@ COPY ./requirements /requirements
 RUN pip install --no-cache-dir -r /requirements/production.txt \
     && rm -rf /requirements
 
+RUN cp /etc/odbcinst.ini /etc/odbc.ini
 RUN ln -s /etc/odbc.ini /usr/local/etc/odbc.ini
 
 COPY ./docker/production/django/uwsgi.sh /uwsgi.sh
