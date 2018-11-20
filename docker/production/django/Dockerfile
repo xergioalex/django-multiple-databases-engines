@@ -28,8 +28,8 @@ RUN unzip /opt/oracle/instantclient-basic-linux.x64-18.3.0.0.0dbru.zip -d /opt/o
 # run  cd /opt/oracle/instantclient_12_2
 
 
-
 # Install uWSGI
+RUN pip install MySQL-python
 RUN pip3 install uwsgi
 
 # Requirements are installed here to ensure they will be cached.
