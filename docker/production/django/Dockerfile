@@ -18,7 +18,7 @@ RUN apt-get update -y && apt-get install unixodbc unixodbc-dev -y
 RUN ACCEPT_EULA=Y apt-get install mssql-tools=14.0.6.0-1 -y
 RUN apt-get install libaio1 libaio-dev -y
 RUN apt-get install unzip -y
-
+RUN apt-get install openssl
 
 RUN mkdir -p /opt/oracle
 COPY ./docker/production/django/instantclient-basic-linux.x64-18.3.0.0.0dbru.zip /opt/oracle/instantclient-basic-linux.x64-18.3.0.0.0dbru.zip
