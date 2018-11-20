@@ -6,7 +6,7 @@ redis==2.10.5  # https://github.com/antirez/redis
 #django-mssql
 pyodbc<4
 django-pyodbc-azure
-python-mysqldb
+MySQL-python
 
 # Django
 # ------------------------------------------------------------------------------
