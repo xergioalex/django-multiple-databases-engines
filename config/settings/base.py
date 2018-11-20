@@ -50,10 +50,20 @@ DATABASES = {
         #     'driver': 'ODBC Driver 17 for SQL Server',
         # },
     },
-    'default': {
+    'mysql': {
         'NAME': 'bsolutions',
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'mysql',
+        'USER': 'bsolutions_user',
+        'PASSWORD': 'bsolutions_password',
+        # 'OPTIONS': {
+        #     'driver': 'ODBC Driver 17 for SQL Server',
+        # },
+    },
+    'default': {
+        'NAME': 'bsolutions',
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'mariadb',
         'USER': 'bsolutions_user',
         'PASSWORD': 'bsolutions_password',
         # 'OPTIONS': {
