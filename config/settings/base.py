@@ -111,8 +111,8 @@ mongoengine.connect(
     db= _MONGODB_NAME,
     host=_MONGODB_HOST,
     port=_MONGODB_PORT,
-    username=_MONGODB_USER,
-    password=_MONGODB_PASSWD
+    # username=_MONGODB_USER,
+    # password=_MONGODB_PASSWD
 )
 
 DATABASES['default']['ATOMIC_REQUESTS'] = True
