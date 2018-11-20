@@ -105,7 +105,6 @@ _MONGODB_HOST = 'mongodb'
 _MONGODB_PORT = 27017
 _MONGODB_USER = 'bsolutions_user'
 _MONGODB_PASSWD = 'bsolutions_password'
-                          mongodb://mongodb:27017/meteor
 _MONGODB_DATABASE_HOST = 'mongodb://%s:%s@%s/%s' % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
 
 mongoengine.connect(
