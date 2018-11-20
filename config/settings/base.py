@@ -53,7 +53,7 @@ DATABASES = {
     'default': {
         'NAME': 'bsolutions',
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'sqlserver',
+        'HOST': 'mysql',
         'USER': 'bsolutions_user',
         'PASSWORD': 'bsolutions_password',
         # 'OPTIONS': {
