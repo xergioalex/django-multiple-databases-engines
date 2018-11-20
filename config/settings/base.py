@@ -102,11 +102,19 @@ DATABASES = {
 
 _MONGODB_NAME = 'bsolutions'
 _MONGODB_HOST = 'mongodb'
+_MONGODB_PORT = 27017
 _MONGODB_USER = 'bsolutions_user'
 _MONGODB_PASSWD = 'bsolutions_password'
+                          mongodb://mongodb:27017/meteor
 _MONGODB_DATABASE_HOST = 'mongodb://%s:%s@%s/%s' % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
 
-mongoengine.connect(_MONGODB_DATABASE_HOST)
+mongoengine.connect(
+    db= _MONGODB_NAME,
+    host=_MONGODB_HOST,
+    port=_MONGODB_PORT,
+    username=_MONGODB_USER,
+    password=_MONGODB_PASSWORD
+)
 
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
