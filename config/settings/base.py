@@ -120,7 +120,17 @@ mongoengine.connect(
     # password=MONGODB_PASSWD
 )
 
+from cloudant.client import CouchDB
+client = CouchDB('bsolutions_user', 'bsolutions_password', url='http://couchdb:5984', connect=True)
+
 DATABASES['default']['ATOMIC_REQUESTS'] = True
+
+
+NEOMODEL_NEO4J_BOLT_URL = 'bolt://neo4j:bsolutions@neo4j:7474'
+NEOMODEL_SIGNALS = True
+NEOMODEL_FORCE_TIMEZONE = False
+NEOMODEL_ENCRYPTED_CONNECTION = True
+NEOMODEL_MAX_POOL_SIZE = 50
 
 # URLS
 # ------------------------------------------------------------------------------
@@ -140,6 +150,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     # 'django.contrib.humanize', # Handy template tags
     'django.contrib.admin',
+    'django_neomodel',
 ]
 THIRD_PARTY_APPS = [
     'crispy_forms',
