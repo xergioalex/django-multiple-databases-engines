@@ -3,6 +3,7 @@ Base settings to build other settings files upon.
 """
 
 import environ
+import mongoengine
 
 ROOT_DIR = environ.Path(__file__) - 3  # (bsolutions/config/settings/base.py - 3 = bsolutions/)
 APPS_DIR = ROOT_DIR.path('bsolutions')
@@ -70,6 +71,16 @@ DATABASES = {
         #     'driver': 'ODBC Driver 17 for SQL Server',
         # },
     },
+    'default': {
+        'NAME': 'bsolutions',
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'mariadb',
+        'USER': 'bsolutions_user',
+        'PASSWORD': 'bsolutions_password',
+        # 'OPTIONS': {
+        #     'driver': 'ODBC Driver 17 for SQL Server',
+        # },
+    },
     # 'default': {
     #     'ENGINE': 'django.db.backends.oracle',
     #     'NAME': 'oracle:1521/bsolutions.oracle',
@@ -89,12 +100,13 @@ DATABASES = {
     # 'mongodb': env.db('DATABASE_URL', default='postgres:///bsolutions'),
 }
 
-# DATABASES = {
-#    ‘default’: {
-#       ‘ENGINE’: ‘djongo’,
-#       ‘NAME’: ‘your-db-name’,
-#    }
-# }
+_MONGODB_NAME = 'bsolutions'
+_MONGODB_HOST = 'mongodb'
+_MONGODB_USER = 'bsolutions_user'
+_MONGODB_PASSWD = 'bsolutions_password'
+_MONGODB_DATABASE_HOST = 'mongodb://%s:%s@%s/%s' % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
+
+mongoengine.connect(_MONGODB_DATABASE_HOST)
 
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
