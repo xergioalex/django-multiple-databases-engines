@@ -5,6 +5,7 @@ import factory.fuzzy
 from faker import Factory as FakerFactory
 faker = FakerFactory.create()
 
+
 class Beacon(models.Model):
     id = models.AutoField(primary_key=True)
     referencia = models.CharField(max_length=45, null=False)
@@ -25,6 +26,7 @@ def getCoordinate():
     lng = float(latlng[1]).__str__()
 
     return lat + ', ' + lng
+
 
 class BeaconFactory(factory.django.DjangoModelFactory):
 
