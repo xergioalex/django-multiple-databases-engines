@@ -126,7 +126,7 @@ client = CouchDB('bsolutions_user', 'bsolutions_password', url='http://couchdb:5
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
-NEOMODEL_NEO4J_BOLT_URL = 'bolt://neo4j:bsolutions@neo4j:7474'
+NEOMODEL_NEO4J_BOLT_URL = 'bolt://neo4j:neo4j@neo4j:7474'
 NEOMODEL_SIGNALS = True
 NEOMODEL_FORCE_TIMEZONE = False
 NEOMODEL_ENCRYPTED_CONNECTION = True
