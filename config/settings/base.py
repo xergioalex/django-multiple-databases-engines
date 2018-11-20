@@ -81,11 +81,11 @@ DATABASES = {
         #     'driver': 'ODBC Driver 17 for SQL Server',
         # },
     },
-    'default' : {
-        'HOST':'neo4j',
-        'PORT': 7474,
-        'ENDPOINT':'/db/data'
-    }
+    # 'default' : {
+    #     'HOST':'neo4j',
+    #     'PORT': 7474,
+    #     'ENDPOINT':'/db/data'
+    # }
     # 'default': {
     #     'ENGINE': 'django.db.backends.oracle',
     #     'NAME': 'oracle:1521/bsolutions.oracle',
