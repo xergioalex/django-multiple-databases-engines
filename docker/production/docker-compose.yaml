@@ -106,7 +106,7 @@ services:
       - mysql/.env
 
   mysql:
-    image: mysql:8.0.13
+    image: mysql:5.7
     volumes:
       - db_mysql_data:/var/lib/mysql
     ports:
