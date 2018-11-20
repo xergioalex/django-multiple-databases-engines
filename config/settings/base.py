@@ -81,6 +81,11 @@ DATABASES = {
         #     'driver': 'ODBC Driver 17 for SQL Server',
         # },
     },
+    'default' : {
+        'HOST':'neo4j',
+        'PORT': 7474,
+        'ENDPOINT':'/db/data'
+    }
     # 'default': {
     #     'ENGINE': 'django.db.backends.oracle',
     #     'NAME': 'oracle:1521/bsolutions.oracle',
@@ -100,19 +105,19 @@ DATABASES = {
     # 'mongodb': env.db('DATABASE_URL', default='postgres:///bsolutions'),
 }
 
-_MONGODB_NAME = 'bsolutions'
-_MONGODB_HOST = 'mongodb'
-_MONGODB_PORT = 27017
-_MONGODB_USER = 'bsolutions_user'
-_MONGODB_PASSWD = 'bsolutions_password'
-_MONGODB_DATABASE_HOST = 'mongodb://%s:%s@%s/%s' % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
+MONGODB_NAME = 'bsolutions'
+MONGODB_HOST = 'mongodb'
+MONGODB_PORT = 27017
+MONGODB_USER = 'bsolutions_user'
+MONGODB_PASSWD = 'bsolutions_password'
+MONGODB_DATABASE_HOST = 'mongodb://%s:%s@%s/%s' % (MONGODB_USER, MONGODB_PASSWD, MONGODB_HOST, MONGODB_NAME)
 
 mongoengine.connect(
-    db= _MONGODB_NAME,
-    host=_MONGODB_HOST,
-    port=_MONGODB_PORT,
-    # username=_MONGODB_USER,
-    # password=_MONGODB_PASSWD
+    db= MONGODB_NAME,
+    host=MONGODB_HOST,
+    port=MONGODB_PORT,
+    # username=MONGODB_USER,
+    # password=MONGODB_PASSWD
 )
 
 DATABASES['default']['ATOMIC_REQUESTS'] = True

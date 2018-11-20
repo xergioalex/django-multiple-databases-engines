@@ -9,6 +9,7 @@ django-pyodbc-azure
 mysqlclient
 tox
 mongoengine
+neo4django
 
 # Django
 # ------------------------------------------------------------------------------
