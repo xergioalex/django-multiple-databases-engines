@@ -124,7 +124,7 @@ if couchDBdatabase.exists():
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
-NEOMODEL_NEO4J_BOLT_URL = 'bolt://neo4j:neo4j@neo4j:7687'
+NEOMODEL_NEO4J_BOLT_URL = 'bolt://neo4j:bsolutions_password@neo4j:7687'
 NEOMODEL_SIGNALS = True
 NEOMODEL_FORCE_TIMEZONE = False
 NEOMODEL_ENCRYPTED_CONNECTION = True
