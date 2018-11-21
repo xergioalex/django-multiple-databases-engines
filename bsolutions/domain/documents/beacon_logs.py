@@ -37,7 +37,7 @@ class EmbeddedBeaconPayload(mongoengine.EmbeddedDocument):
     geolocalizacion = mongoengine.StringField()
     bluetoothName = mongoengine.StringField()
     mensaje = mongoengine.StringField()
-    UUID = mongoengine.UUIDField()
+    UUID = mongoengine.StringField()
     bateria = mongoengine.IntField()
     interval = mongoengine.IntField()
 
@@ -90,11 +90,14 @@ class EmbeddedBeaconPayloadFactory(factory.mongoengine.MongoEngineFactory):
 
     class Meta:
         model = EmbeddedBeaconPayload
+        exclude = ('_UUID',)
+
+    __UUID = factory.Faker('uuid4')
 
     geolocalizacion = factory.LazyAttribute(lambda n: getCoordinate())
     bluetoothName = factory.Faker('name')
     mensaje = factory.Faker('email')
-    UUID = factory.Faker('uuid4')
+    UUID = factory.LazyAttribute(lambda p: '{}'.format(p.__UUID))
     bateria = factory.fuzzy.FuzzyInteger(1, 100)
     interval = factory.fuzzy.FuzzyInteger(1, 10000)
 
