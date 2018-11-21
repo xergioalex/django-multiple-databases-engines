@@ -53,12 +53,11 @@ class EmbeddedUserFactory(factory.mongoengine.MongoEngineFactory):
         model = EmbeddedUser
 
     idUser = factory.fuzzy.FuzzyInteger(1, 100000)
+    user = factory.Faker('user_name')
     nombre = factory.Faker('name')
     correo = factory.Faker('email')
     documento = factory.Faker('itin')
     tipoDocumento = factory.fuzzy.FuzzyChoice(DOCUMENTOS_IDS)
-    genero = factory.fuzzy.FuzzyChoice(GENEROS_IDS)
-    edad = factory.fuzzy.FuzzyInteger(1, 100)
     direccion = factory.Faker('address')
     telefono = factory.Faker('msisdn')
 
