@@ -81,7 +81,7 @@ services:
       - mysql/.env
 
   mysql:
-    image: mysql:8.0.13
+    image: mysql:5.7
     volumes:
       - db_mysql_data:/var/lib/mysql
     ports:
@@ -97,6 +97,15 @@ services:
       - "4003:1433"
     env_file:
       - sqlserver/.env
+
+  # oracle:
+  #   image: container-registry.oracle.com/database/standard:12.1.0.2
+  #   # volumes:
+  #   #   - db_oracle_data:/var/opt/mssql
+  #   # ports:
+  #   #   - "4003:1433"
+  #   env_file:
+  #     - oracle/.env
 
   redis:
     image: redis:3.2

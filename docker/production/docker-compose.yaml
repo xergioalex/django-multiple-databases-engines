@@ -28,7 +28,7 @@ services:
       - couchdb
       - cassandra
       - neo4j
-      - oracle
+      # - oracle
     env_file:
       - django/.env
       - postgres/.env
@@ -123,14 +123,14 @@ services:
     env_file:
       - sqlserver/.env
 
-  oracle:
-    image: container-registry.oracle.com/database/standard:12.1.0.2
-    # volumes:
-    #   - db_oracle_data:/var/opt/mssql
-    # ports:
-    #   - "4003:1433"
-    env_file:
-      - oracle/.env
+  # oracle:
+  #   image: container-registry.oracle.com/database/standard:12.1.0.2
+  #   # volumes:
+  #   #   - db_oracle_data:/var/opt/mssql
+  #   # ports:
+  #   #   - "4003:1433"
+  #   env_file:
+  #     - oracle/.env
 
   redis:
     image: redis:3.2
