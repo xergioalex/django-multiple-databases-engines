@@ -57,9 +57,6 @@ DATABASES = {
         'HOST': 'mysql',
         'USER': 'bsolutions_user',
         'PASSWORD': 'bsolutions_password',
-        # 'OPTIONS': {
-        #     'driver': 'ODBC Driver 17 for SQL Server',
-        # },
     },
     'default': {
         'NAME': 'bsolutions',
@@ -67,19 +64,6 @@ DATABASES = {
         'HOST': 'mariadb',
         'USER': 'bsolutions_user',
         'PASSWORD': 'bsolutions_password',
-        # 'OPTIONS': {
-        #     'driver': 'ODBC Driver 17 for SQL Server',
-        # },
-    },
-    'default': {
-        'NAME': 'bsolutions',
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'mariadb',
-        'USER': 'bsolutions_user',
-        'PASSWORD': 'bsolutions_password',
-        # 'OPTIONS': {
-        #     'driver': 'ODBC Driver 17 for SQL Server',
-        # },
     },
     # 'default' : {
     #     'HOST':'neo4j',
