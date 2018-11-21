@@ -113,7 +113,7 @@ MONGODB_PASSWD = 'bsolutions_password'
 MONGODB_DATABASE_HOST = 'mongodb://%s:%s@%s/%s' % (MONGODB_USER, MONGODB_PASSWD, MONGODB_HOST, MONGODB_NAME)
 
 mongoengine.connect(
-    db= MONGODB_NAME,
+    db=MONGODB_NAME,
     host=MONGODB_HOST,
     port=MONGODB_PORT,
     # username=MONGODB_USER,
@@ -122,6 +122,12 @@ mongoengine.connect(
 
 from cloudant.client import CouchDB
 client = CouchDB('bsolutions_user', 'bsolutions_password', url='http://couchdb:5984', connect=True)
+
+couchDBdatabase = client.create_database('bsolutions__beacon_logs')
+
+# You can check that the database exists
+if couchDBdatabase.exists():
+    print('SUCCESS CREATING COUCHDB!!')
 
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
