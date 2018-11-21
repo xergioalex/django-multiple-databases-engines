@@ -18,7 +18,7 @@ class BeaconLogs(DjangoCassandraModel):
 
 class SocialUserMedia(DjangoCassandraModel):
     id = columns.UUID(primary_key=True, default=uuid.uuid4)
-    userId = columns.UUID(primary_key=True, default=uuid.uuid4)
+    userId = columns.Integer()
     address = columns.Text()
     age_range = columns.Text()
     birthday = columns.DateTime()
