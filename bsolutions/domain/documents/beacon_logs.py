@@ -92,12 +92,12 @@ class EmbeddedBeaconPayloadFactory(factory.mongoengine.MongoEngineFactory):
         model = EmbeddedBeaconPayload
         exclude = ('__UUID',)
 
-    __UUID = factory.Faker('uuid4')
+    UUID_ = factory.Faker('uuid4')
 
     geolocalizacion = factory.LazyAttribute(lambda n: getCoordinate())
     bluetoothName = factory.Faker('name')
     mensaje = factory.Faker('email')
-    UUID = factory.LazyAttribute(lambda p: '{}'.format(p.__UUID))
+    UUID = factory.LazyAttribute(lambda p: '{}'.format(p.UUID_))
     bateria = factory.fuzzy.FuzzyInteger(1, 100)
     interval = factory.fuzzy.FuzzyInteger(1, 10000)
 
