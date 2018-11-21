@@ -104,7 +104,7 @@ class BeaconLogsDocumentFactory(factory.mongoengine.MongoEngineFactory):
     class Meta:
         model = BeaconLogsDocument
 
-    idBeacon = mongoengine.IntField(null=False)
-    interaccion = mongoengine.EmbeddedDocumentField(EmbeddedInteraccion, default=EmbeddedInteraccion())
-    payload = mongoengine.EmbeddedDocumentField(EmbeddedBeaconPayload, default=EmbeddedBeaconPayload())
+    idBeacon = factory.fuzzy.FuzzyInteger(1, 1000)
+    interaccion = factory.SubFactory(EmbeddedInteraccionFactory)
+    payload = factory.SubFactory(EmbeddedBeaconPayloadFactory)
 
