@@ -172,5 +172,6 @@ services:
     volumes:
       - db_neo4j_data:/data
     ports:
-      - "4007:7474"
+      - "7474:7474"
+      - "7687:7687"
 
