@@ -47,8 +47,10 @@ class BeaconLogsDocument(mongoengine.Document):
     payload = mongoengine.EmbeddedDocumentField(EmbeddedBeaconPayload, default=EmbeddedBeaconPayload())
 
 
-class EmbeddedUserFactory(factory.Factory):
-    FACTORY_FOR = EmbeddedUser
+class EmbeddedUserFactory(factory.mongoengine.MongoEngineFactory):
+
+    class Meta:
+        model = EmbeddedUser
 
     idUser = factory.fuzzy.FuzzyInteger(1, 100000)
     nombre = factory.Faker('name')
@@ -61,8 +63,10 @@ class EmbeddedUserFactory(factory.Factory):
     telefono = factory.Faker('msisdn')
 
 
-class EmbeddedProductoFactory(factory.Factory):
-    FACTORY_FOR = EmbeddedProducto
+class EmbeddedProductoFactory(factory.mongoengine.MongoEngineFactory):
+
+    class Meta:
+        model = EmbeddedProducto
 
     idProducto = factory.fuzzy.FuzzyInteger(1, 10000)
     nombre = factory.Faker('name')
@@ -72,16 +76,20 @@ class EmbeddedProductoFactory(factory.Factory):
     tipoProducto = factory.fuzzy.FuzzyInteger(1, 1000)
 
 
-class EmbeddedInteraccionFactory(mongoengine.EmbeddedDocument):
-    FACTORY_FOR = EmbeddedInteraccion
+class EmbeddedInteraccionFactory(factory.mongoengine.MongoEngineFactory):
+
+    class Meta:
+        model = EmbeddedInteraccion
 
     idInteraccion = factory.fuzzy.FuzzyInteger(1, 10000)
     user = factory.SubFactory(EmbeddedUserFactory)
     producto = factory.SubFactory(EmbeddedProductoFactory)
 
 
-class EmbeddedBeaconPayloadFactory(factory.Factory):
-    FACTORY_FOR = EmbeddedBeaconPayload
+class EmbeddedBeaconPayloadFactory(factory.mongoengine.MongoEngineFactory):
+
+    class Meta:
+        model = EmbeddedBeaconPayload
 
     geolocalizacion = factory.Faker('latlng')
     bluetoothName = factory.Faker('name')
