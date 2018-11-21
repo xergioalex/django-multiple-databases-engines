@@ -3,6 +3,7 @@ import factory
 import factory.mongoengine
 import factory.fuzzy
 
+from bsolutions.domain.models.beacon import getCoordinate
 from bsolutions.domain.models.profile import DOCUMENTOS_IDS, GENEROS_IDS
 
 
@@ -90,7 +91,7 @@ class EmbeddedBeaconPayloadFactory(factory.mongoengine.MongoEngineFactory):
     class Meta:
         model = EmbeddedBeaconPayload
 
-    geolocalizacion = factory.Faker('latlng')
+    geolocalizacion = factory.LazyAttribute(lambda n: getCoordinate())
     bluetoothName = factory.Faker('name')
     mensaje = factory.Faker('email')
     UUID = factory.Faker('uuid4')
