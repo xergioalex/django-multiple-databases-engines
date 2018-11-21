@@ -65,6 +65,14 @@ DATABASES = {
         'USER': 'bsolutions_user',
         'PASSWORD': 'bsolutions_password',
     },
+    'cassandra': {
+        'ENGINE': 'django_cassandra_engine',
+        'NAME': 'bsolutions',
+        'USER': 'bsolutions_user',
+        'PASSWORD': 'bsolutions_password',
+        'TEST_NAME': 'test_db',
+        'HOST': 'cassandra',
+    }
     # 'default' : {
     #     'HOST':'neo4j',
     #     'PORT': 7474,
@@ -141,6 +149,7 @@ DJANGO_APPS = [
     # 'django.contrib.humanize', # Handy template tags
     'django.contrib.admin',
     'django_neomodel',
+    'django_cassandra_engine',
 ]
 THIRD_PARTY_APPS = [
     'crispy_forms',

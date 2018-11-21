@@ -11,6 +11,7 @@ tox
 mongoengine
 #neo4django
 cloudant
+django-cassandra-engine
 django_neomodel
 
 # Django
