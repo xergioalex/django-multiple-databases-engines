@@ -40,7 +40,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'postgres': env.db('DATABASE_URL', default='postgres:///bsolutions'),
+    'default': env.db('DATABASE_URL', default='postgres:///bsolutions'),
     'sqlserver': {
         'NAME': 'bsolutions',
         'ENGINE': 'sql_server.pyodbc',
@@ -58,7 +58,7 @@ DATABASES = {
         'USER': 'bsolutions_user',
         'PASSWORD': 'bsolutions_password',
     },
-    'default': {
+    'mariadb': {
         'NAME': 'bsolutions',
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'mariadb',
