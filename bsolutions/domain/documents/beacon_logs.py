@@ -90,7 +90,7 @@ class EmbeddedBeaconPayloadFactory(factory.mongoengine.MongoEngineFactory):
 
     class Meta:
         model = EmbeddedBeaconPayload
-        exclude = ('_UUID',)
+        exclude = ('__UUID',)
 
     __UUID = factory.Faker('uuid4')
 
