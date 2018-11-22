@@ -9,5 +9,6 @@ class AllCompras(ViewSet):
 
     def list(self, request):
         db = request.GET.get('db', 'default')
-        list(Compra.objects.using(db).all()[:1000])
+        limit = request.GET.get('limit', 100)
+        list(Compra.objects.using(db).all()[:int(limit)])
         return Response({'db': db})
