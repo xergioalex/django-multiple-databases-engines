@@ -8,5 +8,6 @@ from bsolutions.domain.models.purchase import Compra
 class AllCompras(ViewSet):
 
     def list(self, request):
-        Compra.objects.all().count()
-        return Response({})
+        db = request.GET.get('db', 'default')
+        list(Compra.objects.all()[:100000])
+        return Response({'db': db})
