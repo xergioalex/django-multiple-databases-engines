@@ -20,5 +20,5 @@ class AllCompras(ViewSet):
     def get_ventas_de_un_usuario(self, request):
         db = request.GET.get('db', 'default')
         limit = request.GET.get('limit', 100)
-        list(Producto.objects.filter(compraproducto__compra__cliente__in=Cliente.objects.using(db).all()[:int(limit)]))
+        list(Producto.objects.using(db).filter(compraproducto__compra__cliente__in=Cliente.objects.using(db).all()[:int(limit)]))
         return Response({})
