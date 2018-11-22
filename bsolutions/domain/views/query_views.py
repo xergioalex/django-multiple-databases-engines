@@ -28,5 +28,5 @@ class AllCompras(ViewSet):
     @action(methods=['GET'], detail=False)
     def get_cassandra_beacon_logs(self, request):
         limit = request.GET.get('limit', 100)
-        list(BeaconLogs.objects.all().limit(limit))
+        list(BeaconLogs.objects.all().limit(int(limit)))
         return Response({})
