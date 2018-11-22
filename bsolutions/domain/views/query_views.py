@@ -15,7 +15,7 @@ class AllCompras(ViewSet):
         list(Compra.objects.using(db).all()[:int(limit)])
         return Response({'db': db})
 
-    @action(methods=['GET'])
+    @action(methods=['GET'], detail=False)
     def get_ventas_de_un_usuario(self, request):
         db = request.GET.get('db', 'default')
         limit = request.GET.get('limit', 100)
