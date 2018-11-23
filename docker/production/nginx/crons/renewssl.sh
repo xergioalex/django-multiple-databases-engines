@@ -24,8 +24,8 @@ function utils.checkContainerPortStatus {
 # ------------ MAIN SCRIPT ---------------
 
 # Docker container service names
-NGINX_SERVICE_CONTAINER=
-CERTBOT_SERVICE_CONTAINER=
+NGINX_SERVICE_CONTAINER=bsolutionsdev_nginx_1
+CERTBOT_SERVICE_CONTAINER=bsolutionsdev_certbot_1
 
 utils.printer "-------------------------------------------------------------------------------"
 utils.printer "Renew Certificate Job"

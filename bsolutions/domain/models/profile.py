@@ -5,6 +5,7 @@ import factory.django
 import factory.fuzzy
 # from enumfields import EnumIntegerField
 
+
 class Cliente(models.Model):
     TIPOS_DOCUMENTOS = (
         (1, 'Cédula de ciudadanía'),

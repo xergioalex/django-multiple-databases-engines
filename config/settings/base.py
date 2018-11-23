@@ -327,3 +327,29 @@ SOCIALACCOUNT_ADAPTER = 'bsolutions.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+
+
+# django-debug-toolbar agregado temporalmente
+# ------------------------------------------------------------------------------
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#prerequisites
+INSTALLED_APPS += ['debug_toolbar']  # noqa F405
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#middleware
+MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']  # noqa F405
+# https://django-debug-toolbar.readthedocs.io/en/latest/configuration.html#debug-toolbar-config
+
+def show_toolbar(request):
+    return True
+
+DEBUG_TOOLBAR_CONFIG = {
+    'DISABLE_PANELS': [
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+    ],
+    'SHOW_TOOLBAR_CALLBACK': show_toolbar,
+    'SHOW_TEMPLATE_CONTEXT': True,
+}
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
+INTERNAL_IPS = ['127.0.0.1', '0.0.0.0', '10.0.2.2']
+
+
+SHOW_TOOLBAR_CALLBACK = show_toolbar
