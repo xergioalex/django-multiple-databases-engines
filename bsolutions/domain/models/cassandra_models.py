@@ -18,7 +18,7 @@ class BeaconLogs(DjangoCassandraModel):
     bluetoothName = columns.Text()
     mensaje = columns.Text()
     UUID = columns.UUID(default=uuid.uuid4)
-    bateria = columns.Integer(index=True)
+    bateria = columns.Integer(primary_key=True, index=True)
     interval = columns.Integer()
 
 
