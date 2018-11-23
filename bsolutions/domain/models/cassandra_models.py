@@ -11,34 +11,40 @@ from bsolutions.domain.models.profile import GENEROS_IDS
 
 class BeaconLogs(DjangoCassandraModel):
     id = columns.UUID(primary_key=True, default=uuid.uuid4)
-    beaconId = columns.Integer()
+    beaconId = columns.Integer(primary_key=True)
     interaccionUser = columns.Map(columns.Integer(), columns.Text())
     interaccionProducto = columns.Map(columns.Integer(), columns.Text())
     geolocalizacion = columns.Text()
-    bluetoothName = columns.Text()
+    bluetoothName = columns.Text(index=True)
     mensaje = columns.Text()
     UUID = columns.UUID(default=uuid.uuid4)
-    bateria = columns.Integer()
+    bateria = columns.Integer(index=True)
     interval = columns.Integer()
+
+    class Meta:
+        get_pk_field = 'id'
 
 
 class SocialUserMedia(DjangoCassandraModel):
     id = columns.UUID(primary_key=True, default=uuid.uuid4)
-    userId = columns.Integer()
-    address = columns.Text()
-    age_range = columns.Text()
+    userId = columns.Integer(primary_key=True)
+    address = columns.Text(index=True)
+    age_range = columns.Text(index=True)
     birthday = columns.DateTime()
     context = columns.Text()
     cover = columns.Text()
     profile_pic = columns.Text()
     email = columns.Text()
-    employee_number = columns.Integer()
+    employee_number = columns.Integer(index=True)
     gender = columns.Text()
     hometown = columns.Text()
     languages = columns.List(columns.Text())
     location = columns.Text()
     religion = columns.Text()
     sports = columns.List(columns.Text())
+
+    class Meta:
+        get_pk_field = 'id'
 
 
 class BeaconLogsCassandraFactory(factory.Factory):
