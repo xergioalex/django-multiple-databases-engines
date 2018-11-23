@@ -21,6 +21,9 @@ class BeaconLogs(DjangoCassandraModel):
     bateria = columns.Integer(primary_key=True, index=True)
     interval = columns.Integer()
 
+    class Meta:
+        get_pk_field = 'id'
+
 
 class SocialUserMedia(DjangoCassandraModel):
     id = columns.UUID(primary_key=True, default=uuid.uuid4)
