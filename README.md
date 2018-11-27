@@ -1,7 +1,5 @@
-# Beyond Campus
+# Bsolutions
 ---
-
-This is the web app for beyond campus
 
 
 ## Docker
