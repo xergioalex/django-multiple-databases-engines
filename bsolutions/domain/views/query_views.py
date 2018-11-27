@@ -1,3 +1,4 @@
+from django.db.models.aggregates import Count
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 
@@ -21,12 +22,68 @@ class AllCompras(ViewSet):
     def get_ventas_de_un_usuario(self, request):
         db = request.GET.get('db', 'default')
         limit = request.GET.get('limit', 100)
+        Cliente.objects.filter(interaccion__materializado=True)
         list(Producto.objects.using(db).filter(compraproducto__compra__cliente__in=Cliente.objects.using(db).all()[:int(limit)]))
         return Response({})
 
+    @action(methods=['GET'], detail=False)
+    def numero_de_ventas_por_producto(self, request):
+        db = request.GET.get('db', 'default')
+        limit = int(request.GET.get('limit', 100))
+        list(Producto.objects.using(db).all()[:limit].annotate(total_ventas=Count('compraproducto__cantidad')))
+        return Response({})
 
     @action(methods=['GET'], detail=False)
-    def get_cassandra_beacon_logs(self, request):
+    def notificaciones_por_producto(self, request):
+        db = request.GET.get('db', 'default')
+        limit = request.GET.get('limit', 100)
+        list(BeaconLogs.objects.all().limit(int(limit)))
+        return Response({})
+
+    @action(methods=['GET'], detail=False)
+    def interacciones_materializadas(self, request):
+        db = request.GET.get('db', 'default')
+        limit = request.GET.get('limit', 100)
+        list(BeaconLogs.objects.all().limit(int(limit)))
+        return Response({})
+
+    @action(methods=['GET'], detail=False)
+    def interacciones_por_clientes(self, request):
+        db = request.GET.get('db', 'default')
+        limit = request.GET.get('limit', 100)
+        list(BeaconLogs.objects.all().limit(int(limit)))
+        return Response({})
+
+    @action(methods=['GET'], detail=False)
+    def ventas_por_tipo_de_producto(self, request):
+        db = request.GET.get('db', 'default')
+        limit = request.GET.get('limit', 100)
+        list(BeaconLogs.objects.all().limit(int(limit)))
+        return Response({})
+
+    @action(methods=['GET'], detail=False)
+    def ventas_por_trimestre(self, request):
+        db = request.GET.get('db', 'default')
+        limit = request.GET.get('limit', 100)
+        list(BeaconLogs.objects.all().limit(int(limit)))
+        return Response({})
+
+    @action(methods=['GET'], detail=False)
+    def interacciones_por_trimestre(self, request):
+        db = request.GET.get('db', 'default')
+        limit = request.GET.get('limit', 100)
+        list(BeaconLogs.objects.all().limit(int(limit)))
+        return Response({})
+    @action(methods=['GET'], detail=False)
+    def ventas_por_rango_de_edad(self, request):
+        db = request.GET.get('db', 'default')
+        limit = request.GET.get('limit', 100)
+        list(BeaconLogs.objects.all().limit(int(limit)))
+        return Response({})
+
+    @action(methods=['GET'], detail=False)
+    def ventas_por_genero(self, request):
+        db = request.GET.get('db', 'default')
         limit = request.GET.get('limit', 100)
         list(BeaconLogs.objects.all().limit(int(limit)))
         return Response({})

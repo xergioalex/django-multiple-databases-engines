@@ -26,5 +26,4 @@ class Command(BaseCommand):
             b['_id'] = str(b['_id'])
             b['collection'] = 'BeaconLogsDocument'
             couchDBdatabase.create_document(b)
-            if _ % 10000 == 0:
-                print(f"elementos creados iteracion # {_}")
+            print(f"elementos creados iteracion # {_}")
