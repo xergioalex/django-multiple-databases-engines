@@ -3,6 +3,7 @@ from django.db import models
 import factory
 import factory.django
 import factory.fuzzy
+from django.utils import timezone
 
 from .product import ProductoFactory
 from .profile import ClienteFactory
@@ -16,7 +17,7 @@ class Compra(models.Model):
     )
     id = models.AutoField(primary_key=True)
     cliente = models.ForeignKey('Cliente', db_column='idCliente', on_delete=models.CASCADE, null=False)
-    fecha = models.DateTimeField(auto_now_add=True, null=False)
+    fecha = models.DateTimeField(default=timezone.now, null=False)
     medioPago = models.IntegerField(null=False, choices=MEDIO_PAGO)
     descuento = models.FloatField(default=0.0, null=True)
 

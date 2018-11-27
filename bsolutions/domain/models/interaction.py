@@ -3,6 +3,7 @@ from django.db import models
 import factory
 import factory.django
 import factory.fuzzy
+from django.utils import timezone
 
 from .notifications import NotificacionFactory
 from .profile import ClienteFactory
@@ -12,7 +13,7 @@ class Interaccion(models.Model):
     id = models.AutoField(primary_key=True)
     cliente = models.ForeignKey('Cliente', db_column='idCliente', on_delete=models.CASCADE, null=False)
     notificacion = models.ForeignKey('Notificacion', db_column='idNotificacion', on_delete=models.CASCADE, null=False)
-    fecha = models.DateTimeField(auto_now_add=True, null=False)
+    fecha = models.DateTimeField(default=timezone.now, null=False)
     materializado = models.BooleanField(default=False, null=False)
 
     class Meta:

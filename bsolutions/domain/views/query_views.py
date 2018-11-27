@@ -1,4 +1,5 @@
 from django.db.models.aggregates import Count, Sum
+from django.db.models.expressions import F
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 
@@ -66,18 +67,19 @@ class AllCompras(ViewSet):
         return Response({})
 
     @action(methods=['GET'], detail=False)
-    def ventas_por_trimestre(self, request):
+    def ventas_por_mes(self, request):
+        db = request.GET.get('db', 'default')
+        limit = int(request.GET.get('limit', 100))
+        list(Compra.objects.using(db).all()[:100].annotate(month=F('fecha__month')).values('month').annotate(total=Count('month')))
+        return Response({})
+
+    @action(methods=['GET'], detail=False)
+    def interacciones_por_mes(self, request):
         db = request.GET.get('db', 'default')
         limit = int(request.GET.get('limit', 100))
         list(BeaconLogs.objects.all().limit(int(limit)))
         return Response({})
 
-    @action(methods=['GET'], detail=False)
-    def interacciones_por_trimestre(self, request):
-        db = request.GET.get('db', 'default')
-        limit = int(request.GET.get('limit', 100))
-        list(BeaconLogs.objects.all().limit(int(limit)))
-        return Response({})
     @action(methods=['GET'], detail=False)
     def ventas_por_rango_de_edad(self, request):
         db = request.GET.get('db', 'default')
