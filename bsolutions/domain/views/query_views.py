@@ -1,5 +1,5 @@
 from django.db.models.aggregates import Count, Sum
-from django.db.models.expressions import F
+from django.db.models.functions.datetime import TruncMonth
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 
@@ -70,7 +70,9 @@ class AllCompras(ViewSet):
     def ventas_por_mes(self, request):
         db = request.GET.get('db', 'default')
         limit = int(request.GET.get('limit', 100))
-        list(Compra.objects.using(db).all()[:100].annotate(month=F('fecha__month')).values('month').annotate(total=Count('month')))
+        Compra.objects.annotate(
+            month=TruncMonth('fecha')
+        ).values('month').annotate(total=Count('id')).values('month', 'total')
         return Response({})
 
     @action(methods=['GET'], detail=False)
