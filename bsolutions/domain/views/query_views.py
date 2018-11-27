@@ -1,11 +1,11 @@
 from django.db.models.aggregates import Count, Sum
+from django.db.models.expressions import F
 from django.db.models.functions.datetime import TruncMonth
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 
 from rest_framework.response import Response
 
-from bsolutions.domain.models.cassandra_models import BeaconLogs
 from bsolutions.domain.models.interaction import Interaccion
 from bsolutions.domain.models.product import Producto
 from bsolutions.domain.models.product_type import TipoProducto
@@ -69,29 +69,30 @@ class AllCompras(ViewSet):
     @action(methods=['GET'], detail=False)
     def ventas_por_mes(self, request):
         db = request.GET.get('db', 'default')
-        limit = int(request.GET.get('limit', 100))
-        Compra.objects.annotate(
+        list(Compra.objects.using(db).annotate(
             month=TruncMonth('fecha')
-        ).values('month').annotate(total=Count('id')).values('month', 'total')
+        ).values('month').annotate(total=Count('id')).values('month', 'total'))
         return Response({})
 
     @action(methods=['GET'], detail=False)
     def interacciones_por_mes(self, request):
         db = request.GET.get('db', 'default')
-        limit = int(request.GET.get('limit', 100))
-        list(BeaconLogs.objects.all().limit(int(limit)))
+        list(Interaccion.objects.using(db).annotate(
+            month=TruncMonth('fecha')
+        ).values('month').annotate(total=Count('id')).values('month', 'total'))
+
         return Response({})
 
     @action(methods=['GET'], detail=False)
     def ventas_por_rango_de_edad(self, request):
         db = request.GET.get('db', 'default')
-        limit = int(request.GET.get('limit', 100))
-        list(BeaconLogs.objects.all().limit(int(limit)))
+        list(Cliente.objects.using(db).all().annotate(
+            rango=F('edad') / 10
+        ).values('rango').annotate(total=Count('compra')).values('rango', 'total'))
         return Response({})
 
     @action(methods=['GET'], detail=False)
     def ventas_por_genero(self, request):
         db = request.GET.get('db', 'default')
-        limit = int(request.GET.get('limit', 100))
-        list(BeaconLogs.objects.all().limit(int(limit)))
+        list(Cliente.objects.using(db).all().values('genero').annotate(total=Count('compra')).values('genero', 'total'))
         return Response({})
