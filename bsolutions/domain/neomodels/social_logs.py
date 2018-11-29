@@ -2,9 +2,10 @@ from datetime import datetime
 
 from django_neomodel import DjangoNode
 from neomodel import StructuredRel, StringProperty, DateTimeProperty, UniqueIdProperty
+from neomodel.relationship_manager import RelationshipTo
 
 
-class InteraccionNode(StructuredRel):
+class InteraccionRel(StructuredRel):
     fecha = DateTimeProperty(default=datetime.utcnow)
     mensaje = StringProperty()
 
@@ -21,6 +22,7 @@ class PersonaNode(DjangoNode):
     uid = UniqueIdProperty()
     nombre = StringProperty()
     creada = DateTimeProperty(default=datetime.utcnow)
+    beacons = RelationshipTo('BeaconNode', 'INTERACCION', model=InteraccionRel)
 
     class Meta:
         app_label = 'logs'
