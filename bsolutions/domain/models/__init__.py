@@ -6,3 +6,4 @@ from .product_type import TipoProducto
 from .profile import Cliente
 from .purchase import Compra, CompraProducto
 from .cassandra_models import BeaconLogs, SocialUserMedia
+from ..neomodels.social_logs import *
