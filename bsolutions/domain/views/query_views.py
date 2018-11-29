@@ -6,6 +6,7 @@ from rest_framework.viewsets import ViewSet
 
 from rest_framework.response import Response
 
+from bsolutions.domain.documents.beacon_logs import BeaconLogsDocument
 from bsolutions.domain.models.interaction import Interaccion
 from bsolutions.domain.models.product import Producto
 from bsolutions.domain.models.product_type import TipoProducto
@@ -96,3 +97,28 @@ class AllCompras(ViewSet):
         db = request.GET.get('db', 'default')
         list(Cliente.objects.using(db).all().values('genero').annotate(total=Count('compra')).values('genero', 'total'))
         return Response({})
+
+
+class AllDocumentedMongoViews(ViewSet):
+
+    @action(methods=['GET'], detail=False)
+    def beacon_logs(self, request):
+        limit = int(request.GET.get('limit', 1000))
+        query = BeaconLogsDocument.objects.all()[:limit]
+        list(query)
+        return Response({'beacon_logs': query._query})
+
+    @action(methods=['GET'], detail=False)
+    def filtrar_beacons_por_bateria(self, request):
+        limit = int(request.GET.get('limit', 1000))
+        battery = int(request.GET.get('battery', 40))
+        query = BeaconLogsDocument.objects.filter(payload__bateria__lte=battery)[:limit]
+        list(query)
+        return Response({'beacon_logs': query._query})
+
+    @action(methods=['GET'], detail=False)
+    def numero_de_interacciones_por_mes(self, request):
+        query = {'$group': {'_id': {'$substr': ['$interaccion.fecha', 5, 2]}, 'total': {'$sum': 1}}},
+        queryDocumet = BeaconLogsDocument.objects.all().aggregate(query)
+        list(queryDocumet)
+        return Response({'beacon_logs': query})

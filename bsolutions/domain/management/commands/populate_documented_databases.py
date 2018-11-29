@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 
 from bsolutions.domain.documents.beacon_logs import BeaconLogsDocumentFactory
+from bsolutions.domain.documents.social_user_media import SocialUserMediaDocumentFactory
 from bsolutions.domain.factoryboy_utils import DBAwareFactory
 from bsolutions.domain.models.notifications import NotificacionFactory
 from bsolutions.domain.models.purchase import CompraProductoFactory
@@ -26,4 +27,11 @@ class Command(BaseCommand):
             b['_id'] = str(b['_id'])
             b['collection'] = 'BeaconLogsDocument'
             couchDBdatabase.create_document(b)
+
+            a = SocialUserMediaDocumentFactory()
+            b = a.to_mongo().to_dict()
+            b['_id'] = str(b['_id'])
+            b['collection'] = 'SocialUserMediaDocument'
+            couchDBdatabase.create_document(b)
+
             print(f"elementos creados iteracion # {_}")

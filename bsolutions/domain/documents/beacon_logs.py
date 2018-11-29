@@ -2,9 +2,10 @@ import mongoengine
 import factory
 import factory.mongoengine
 import factory.fuzzy
+from django.utils import timezone
 
 from bsolutions.domain.models.beacon import getCoordinate
-from bsolutions.domain.models.profile import DOCUMENTOS_IDS, GENEROS_IDS
+from bsolutions.domain.models.profile import DOCUMENTOS_IDS
 
 
 class EmbeddedUser(mongoengine.EmbeddedDocument):
@@ -31,6 +32,7 @@ class EmbeddedInteraccion(mongoengine.EmbeddedDocument):
     idInteraccion = mongoengine.IntField(null=False)
     user = mongoengine.EmbeddedDocumentField(EmbeddedUser, default=EmbeddedUser())
     producto = mongoengine.EmbeddedDocumentField(EmbeddedProducto, default=EmbeddedProducto())
+    fecha = mongoengine.DateTimeField(default=timezone.now)
 
 
 class EmbeddedBeaconPayload(mongoengine.EmbeddedDocument):
