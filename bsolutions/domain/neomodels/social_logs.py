@@ -8,9 +8,6 @@ class InteraccionNode(StructuredRel):
     fecha = DateTimeProperty(default=datetime.utcnow)
     mensaje = StringProperty()
 
-    class Meta:
-        app_label = 'logs'
-
 
 class BeaconNode(DjangoNode):
     uid = UniqueIdProperty()
@@ -21,7 +18,7 @@ class BeaconNode(DjangoNode):
 
 
 class PersonaNode(DjangoNode):
-    uid = UniqueIdProperty(unique_index=True)
+    uid = UniqueIdProperty()
     nombre = StringProperty()
     creada = DateTimeProperty(default=datetime.utcnow)
 
