@@ -32,6 +32,7 @@ class Command(BaseCommand):
             a = SocialUserMediaDocumentFactory()
             b = a.to_mongo().to_dict()
             b['_id'] = str(b['_id'])
+            b['socialContext']['birthday'] = str(b['socialContext']['birthday'])
             b['collection'] = 'SocialUserMediaDocument'
             couchDBdatabase.create_document(b)
 
