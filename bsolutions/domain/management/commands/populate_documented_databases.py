@@ -25,12 +25,12 @@ class Command(BaseCommand):
             a = BeaconLogsDocumentFactory()
             b = a.to_mongo().to_dict()
             b['_id'] = str(b['_id'])
+            b['interaccion']['fecha'] =str(b['interaccion']['fecha'])
             b['collection'] = 'BeaconLogsDocument'
             couchDBdatabase.create_document(b)
 
             a = SocialUserMediaDocumentFactory()
             b = a.to_mongo().to_dict()
-            b['interaccion']['fecha'] =str(b['interaccion']['fecha'])
             b['_id'] = str(b['_id'])
             b['collection'] = 'SocialUserMediaDocument'
             couchDBdatabase.create_document(b)
