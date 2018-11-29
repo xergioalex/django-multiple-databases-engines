@@ -34,7 +34,7 @@ class EmbeddedUserSocialContextFactory(factory.mongoengine.MongoEngineFactory):
     class Meta:
         model = EmbeddedUserSocialContext
 
-    id = factory.Faker('uuid4')
+    id = factory.fuzzy.FuzzyInteger(1, 1000000)
     address = factory.Faker('address')
     age_range = factory.Faker('year')
     birthday = factory.Faker('date_of_birth')
