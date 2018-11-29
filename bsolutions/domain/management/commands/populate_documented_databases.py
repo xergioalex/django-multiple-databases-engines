@@ -36,4 +36,5 @@ class Command(BaseCommand):
             b['collection'] = 'SocialUserMediaDocument'
             couchDBdatabase.create_document(b)
 
-            print(f"elementos creados iteracion # {_}")
+            if _ % 1000 == 0:
+                print(f"elementos creados iteracion # {_}")
