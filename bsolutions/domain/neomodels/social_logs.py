@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import factory
 from django_neomodel import DjangoNode
 from neomodel import StructuredRel, StringProperty, DateTimeProperty, UniqueIdProperty
 from neomodel.relationship_manager import RelationshipTo
@@ -26,3 +27,18 @@ class PersonaNode(DjangoNode):
 
     class Meta:
         app_label = 'logs'
+
+
+class PersonaNodeFactory(factory.Factory):
+    nombre = factory.Faker('name')
+
+    class Meta:
+        model = PersonaNode
+        abstract = False
+
+
+class BeaconNodeFactory(factory.Factory):
+
+    class Meta:
+        model = BeaconNode
+        abstract = False
