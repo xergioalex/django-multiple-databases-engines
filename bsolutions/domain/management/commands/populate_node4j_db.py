@@ -30,7 +30,7 @@ class Command(BaseCommand):
 
             faker = FakerFactory.create()
             for persona_node in PersonaNode.nodes.all():
-                random_limit = random.randint(10)
+                random_limit = random.randint(1, 10)
                 for beacon_node in BeaconNode.nodes.order_by('?')[:random_limit]:
                     rel = persona_node.beacons.connect(beacon_node)
                     rel.mensaje = faker.text(max_nb_chars=200, ext_word_list=None)
