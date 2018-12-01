@@ -1,3 +1,4 @@
+import time
 from django.db.models.aggregates import Count, Sum
 from django.db.models.expressions import F
 from django.db.models.functions.datetime import TruncMonth
@@ -105,20 +106,23 @@ class AllDocumentedMongoViews(ViewSet):
     def beacon_logs(self, request):
         limit = int(request.GET.get('limit', 1000))
         query = BeaconLogsDocument.objects.all()[:limit]
+        start_time = time.time()
         list(query)
-        return Response({'beacon_logs': query._query})
+        return Response({'time': time.time() - start_time, 'query': query._query, 'result': query[:10]})
 
     @action(methods=['GET'], detail=False)
     def filtrar_beacons_por_bateria(self, request):
         limit = int(request.GET.get('limit', 1000))
         battery = int(request.GET.get('battery', 40))
         query = BeaconLogsDocument.objects.filter(payload__bateria__lte=battery)[:limit]
+        start_time = time.time()
         list(query)
-        return Response({'beacon_logs': query._query})
+        return Response({'time': time.time() - start_time, 'query': query._query, 'parcial_result': query[:10]})
 
     @action(methods=['GET'], detail=False)
     def numero_de_interacciones_por_mes(self, request):
         query = {'$group': {'_id': {'$substr': ['$interaccion.fecha', 5, 2]}, 'total': {'$sum': 1}}}
         queryDocumet = BeaconLogsDocument.objects.all().aggregate(query)
-        list(queryDocumet)
-        return Response({'beacon_logs': query})
+        start_time = time.time()
+        list(query)
+        return Response({'time': time.time() - start_time, 'query': query, 'result': list(queryDocumet)})
