@@ -30,7 +30,9 @@ class Command(BaseCommand):
 
             faker = FakerFactory.create()
             i = 0
-            for persona_node in PersonaNode.nodes.all():
+            limit = PersonaNode.nodes.has(beacons=False).__len__()
+
+            for persona_node in (query for query in (PersonaNode.nodes.has(beacons=False)[x:x+10] for x in range(0, limit, 10))):
                 random_limit = random.randint(1, 10)
                 for beacon_node in BeaconNode.nodes.order_by('?')[:random_limit]:
                     rel = persona_node.beacons.connect(beacon_node)
