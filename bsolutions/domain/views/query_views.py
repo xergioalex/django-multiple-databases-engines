@@ -182,3 +182,17 @@ class AllNeo4jViews(ViewSet):
             'time': time.time() - start_time,
             'query': query_language
         })
+
+    @action(methods=['GET'], detail=False)
+    def beacons_de_persona_aleatoria(self, request):
+        limit = int(request.GET.get('limit', 100))
+        persona = PersonaNode.nodes.has(beacons=True).order_by('?')[0]
+        query = persona.beacons.filter()
+        query_language = QueryBuilder(query).build_ast().build_query()
+        start_time = time.time()
+        list(query[:limit])
+
+        return Response({
+            'time': time.time() - start_time,
+            'query': query_language
+        })
