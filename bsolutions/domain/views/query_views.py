@@ -118,7 +118,7 @@ class AllDocumentedMongoViews(ViewSet):
 
     @action(methods=['GET'], detail=False)
     def numero_de_interacciones_por_mes(self, request):
-        query = {'$group': {'_id': {'$substr': ['$interaccion.fecha', 5, 2]}, 'total': {'$sum': 1}}},
+        query = {'$group': {'_id': {'$substr': ['$interaccion.fecha', 5, 2]}, 'total': {'$sum': 1}}}
         queryDocumet = BeaconLogsDocument.objects.all().aggregate(query)
         list(queryDocumet)
         return Response({'beacon_logs': query})
