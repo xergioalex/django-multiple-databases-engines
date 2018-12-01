@@ -108,7 +108,7 @@ class AllDocumentedMongoViews(ViewSet):
         query = BeaconLogsDocument.objects.all()[:limit]
         start_time = time.time()
         list(query)
-        return Response({'time': time.time() - start_time, 'query': query._query, 'result': query[:10]})
+        return Response({'time': time.time() - start_time, 'query': query._query, 'result': list(query[:10])})
 
     @action(methods=['GET'], detail=False)
     def filtrar_beacons_por_bateria(self, request):
@@ -117,7 +117,7 @@ class AllDocumentedMongoViews(ViewSet):
         query = BeaconLogsDocument.objects.filter(payload__bateria__lte=battery)[:limit]
         start_time = time.time()
         list(query)
-        return Response({'time': time.time() - start_time, 'query': query._query, 'parcial_result': query[:10]})
+        return Response({'time': time.time() - start_time, 'query': query._query, 'parcial_result': list(query[:10])})
 
     @action(methods=['GET'], detail=False)
     def numero_de_interacciones_por_mes(self, request):
