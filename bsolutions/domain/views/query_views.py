@@ -2,7 +2,7 @@ import time
 from django.db.models.aggregates import Count, Sum
 from django.db.models.expressions import F
 from django.db.models.functions.datetime import TruncMonth
-from neomodel.match import QueryBuilder
+from neomodel.match import QueryBuilder, NodeSet
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 
@@ -147,10 +147,10 @@ class AllNeo4jViews(ViewSet):
     @action(methods=['GET'], detail=False)
     def beacons(self, request):
         limit = int(request.GET.get('limit', 100))
-        query = BeaconNode.nodes.filter()[:limit]
+        query = BeaconNode.nodes.filter()
         query_language = QueryBuilder(query).build_ast().build_query()
         start_time = time.time()
-        list(query)
+        list(query[:limit])
 
         return Response({
             'time': time.time() - start_time,
@@ -160,10 +160,10 @@ class AllNeo4jViews(ViewSet):
     @action(methods=['GET'], detail=False)
     def persona(self, request):
         limit = int(request.GET.get('limit', 100))
-        query = PersonaNode.nodes.filter()[:limit]
+        query = PersonaNode.nodes.filter()
         query_language = QueryBuilder(query).build_ast().build_query()
         start_time = time.time()
-        list(query)
+        list(query[:limit])
 
         return Response({
             'time': time.time() - start_time,
@@ -171,9 +171,14 @@ class AllNeo4jViews(ViewSet):
         })
 
     @action(methods=['GET'], detail=False)
-    def interacciones(self, request):
-        query = {'$group': {'_id': {'$substr': ['$interaccion.fecha', 5, 2]}, 'total': {'$sum': 1}}}
-        queryDocumet = BeaconLogsDocument.objects.all().aggregate(query)
+    def personas_con_interacciones(self, request):
+        limit = int(request.GET.get('limit', 100))
+        query = PersonaNode.nodes.has(beacons=True)
+        query_language = QueryBuilder(query).build_ast().build_query()
         start_time = time.time()
-        list(query)
-        return Response({'time': time.time() - start_time, 'query': query, 'parcial_result': list(queryDocumet)})
+        list(query[:limit])
+
+        return Response({
+            'time': time.time() - start_time,
+            'query': query_language
+        })
