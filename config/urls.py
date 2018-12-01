@@ -5,11 +5,12 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
-from bsolutions.domain.views.query_views import AllCompras
+from bsolutions.domain.views.query_views import AllCompras, AllDocumentedMongoViews
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'compras', AllCompras, base_name='compras')
+router.register(r'mongo', AllDocumentedMongoViews, base_name='mongo')
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
