@@ -2,6 +2,7 @@ import time
 from django.db.models.aggregates import Count, Sum
 from django.db.models.expressions import F
 from django.db.models.functions.datetime import TruncMonth
+from neomodel.match import QueryBuilder
 from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 
@@ -13,6 +14,7 @@ from bsolutions.domain.models.product import Producto
 from bsolutions.domain.models.product_type import TipoProducto
 from bsolutions.domain.models.profile import Cliente
 from bsolutions.domain.models.purchase import Compra
+from bsolutions.domain.neomodels.social_logs import BeaconNode, PersonaNode
 
 
 class AllCompras(ViewSet):
@@ -28,7 +30,7 @@ class AllCompras(ViewSet):
         db = request.GET.get('db', 'default')
         limit = request.GET.get('limit', 100)
         Cliente.objects.filter(interaccion__materializado=True)
-        list(Producto.objects.using(db).filter(compraproducto__compra__cliente__in=Cliente.objects.using(db).all()[:int(limit)]))
+        Producto.objects.using(db).filter(compraproducto__compra__cliente__in=Cliente.objects.using(db).all()[:int(limit)])
         return Response({})
 
     @action(methods=['GET'], detail=False)
@@ -104,7 +106,7 @@ class AllDocumentedMongoViews(ViewSet):
 
     @action(methods=['GET'], detail=False)
     def beacon_logs(self, request):
-        limit = int(request.GET.get('limit', 1000))
+        limit = int(request.GET.get('limit', 100))
         query = BeaconLogsDocument.objects.all()[:limit]
         start_time = time.time()
         list(query)
@@ -133,6 +135,41 @@ class AllDocumentedMongoViews(ViewSet):
 
     @action(methods=['GET'], detail=False)
     def numero_de_interacciones_por_mes(self, request):
+        query = {'$group': {'_id': {'$substr': ['$interaccion.fecha', 5, 2]}, 'total': {'$sum': 1}}}
+        queryDocumet = BeaconLogsDocument.objects.all().aggregate(query)
+        start_time = time.time()
+        list(query)
+        return Response({'time': time.time() - start_time, 'query': query, 'parcial_result': list(queryDocumet)})
+
+
+class AllNeo4jViews(ViewSet):
+
+    @action(methods=['GET'], detail=False)
+    def beacons(self, request):
+        limit = int(request.GET.get('limit', 100))
+        query = BeaconNode.nodes.filter()[:limit]
+        start_time = time.time()
+        list(query)
+
+        return Response({
+            'time': time.time() - start_time,
+            'query': QueryBuilder(query).build_ast().build_query()
+        })
+
+    @action(methods=['GET'], detail=False)
+    def persona(self, request):
+        limit = int(request.GET.get('limit', 100))
+        query = PersonaNode.nodes.filter()[:limit]
+        start_time = time.time()
+        list(query)
+
+        return Response({
+            'time': time.time() - start_time,
+            'query': QueryBuilder(query).build_ast().build_query()
+        })
+
+    @action(methods=['GET'], detail=False)
+    def interacciones(self, request):
         query = {'$group': {'_id': {'$substr': ['$interaccion.fecha', 5, 2]}, 'total': {'$sum': 1}}}
         queryDocumet = BeaconLogsDocument.objects.all().aggregate(query)
         start_time = time.time()

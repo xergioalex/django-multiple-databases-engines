@@ -1,3 +1,4 @@
+from cloudant.query import Query
 from django.core.management.base import BaseCommand
 
 from bsolutions.domain.documents.beacon_logs import BeaconLogsDocumentFactory
