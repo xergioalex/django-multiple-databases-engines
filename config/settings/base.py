@@ -40,8 +40,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'postgres': env.db('DATABASE_URL', default='postgres:///bsolutions'),
-    'default': {
+    'default': env.db('DATABASE_URL', default='postgres:///bsolutions'),
+    'sqlserver': {
         'NAME': 'bsolutions',
         'ENGINE': 'sql_server.pyodbc',
         'HOST': 'sqlserver',
