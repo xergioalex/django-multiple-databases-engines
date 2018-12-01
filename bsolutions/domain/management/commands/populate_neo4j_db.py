@@ -32,14 +32,15 @@ class Command(BaseCommand):
             i = 0
             limit = PersonaNode.nodes.has(beacons=False).__len__()
 
-            for persona_node in (query for query in (PersonaNode.nodes.has(beacons=False)[x:x+10] for x in range(0, limit, 10))):
+            for query in (PersonaNode.nodes.has(beacons=False)[x:x+10] for x in range(0, limit, 10)):
                 random_limit = random.randint(1, 10)
-                for beacon_node in BeaconNode.nodes.order_by('?')[:random_limit]:
-                    rel = persona_node.beacons.connect(beacon_node)
-                    rel.mensaje = faker.text(max_nb_chars=200, ext_word_list=None)
-                    rel.save()
-                    i += 1
-                    print(f"relaciones creadas {i}")
+                for persona_node in query:
+                    for beacon_node in BeaconNode.nodes.order_by('?')[:random_limit]:
+                        rel = persona_node.beacons.connect(beacon_node)
+                        rel.mensaje = faker.text(max_nb_chars=200, ext_word_list=None)
+                        rel.save()
+                        i += 1
+                        print(f"relaciones creadas {i}")
 
             return
 
