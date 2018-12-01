@@ -108,7 +108,13 @@ class AllDocumentedMongoViews(ViewSet):
         query = BeaconLogsDocument.objects.all()[:limit]
         start_time = time.time()
         list(query)
-        return Response({'time': time.time() - start_time, 'query': query._query, 'parcial_result': [x.to_mongo().to_dict() for x in query[:10]]})
+        a = []
+        for b in query[:10]:
+            c = b.to_mongo().to_dict()
+            c['_id'] = str(c['_id'])
+            c['interaccion']['fecha'] =str(c['interaccion']['fecha'])
+            a.append(c)
+        return Response({'time': time.time() - start_time, 'query': query._query, 'parcial_result': a})
 
     @action(methods=['GET'], detail=False)
     def filtrar_beacons_por_bateria(self, request):
@@ -117,7 +123,13 @@ class AllDocumentedMongoViews(ViewSet):
         query = BeaconLogsDocument.objects.filter(payload__bateria__lte=battery)[:limit]
         start_time = time.time()
         list(query)
-        return Response({'time': time.time() - start_time, 'query': query._query, 'parcial_result': [x.to_mongo().to_dict() for x in query[:10]]})
+        a = []
+        for b in query[:10]:
+            c = b.to_mongo().to_dict()
+            c['_id'] = str(c['_id'])
+            c['interaccion']['fecha'] =str(c['interaccion']['fecha'])
+            a.append(c)
+        return Response({'time': time.time() - start_time, 'query': query._query, 'parcial_result': a})
 
     @action(methods=['GET'], detail=False)
     def numero_de_interacciones_por_mes(self, request):
