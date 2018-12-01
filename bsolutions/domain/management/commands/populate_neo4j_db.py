@@ -40,7 +40,8 @@ class Command(BaseCommand):
                         rel.mensaje = faker.text(max_nb_chars=200, ext_word_list=None)
                         rel.save()
                         i += 1
-                        print(f"relaciones creadas {i}")
+                        if i % 1000 == 0:
+                            print(f"elementos creados iteracion # {i}")
 
             return
 
