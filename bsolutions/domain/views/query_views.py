@@ -148,24 +148,26 @@ class AllNeo4jViews(ViewSet):
     def beacons(self, request):
         limit = int(request.GET.get('limit', 100))
         query = BeaconNode.nodes.filter()[:limit]
+        query_language = QueryBuilder(query).build_ast().build_query()
         start_time = time.time()
         list(query)
 
         return Response({
             'time': time.time() - start_time,
-            'query': QueryBuilder(query).build_ast().build_query()
+            'query': query_language
         })
 
     @action(methods=['GET'], detail=False)
     def persona(self, request):
         limit = int(request.GET.get('limit', 100))
         query = PersonaNode.nodes.filter()[:limit]
+        query_language = QueryBuilder(query).build_ast().build_query()
         start_time = time.time()
         list(query)
 
         return Response({
             'time': time.time() - start_time,
-            'query': QueryBuilder(query).build_ast().build_query()
+            'query': query_language
         })
 
     @action(methods=['GET'], detail=False)
