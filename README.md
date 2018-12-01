@@ -1,6 +1,7 @@
 # Bsolutions
 ---
 
+![Docker Stack](DockerStack.png)
 
 ## Docker
 
