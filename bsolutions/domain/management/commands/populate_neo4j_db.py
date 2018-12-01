@@ -29,12 +29,18 @@ class Command(BaseCommand):
         if options['create_rel']:
 
             faker = FakerFactory.create()
+            i = 0
             for persona_node in PersonaNode.nodes.all():
                 random_limit = random.randint(1, 10)
                 for beacon_node in BeaconNode.nodes.order_by('?')[:random_limit]:
                     rel = persona_node.beacons.connect(beacon_node)
                     rel.mensaje = faker.text(max_nb_chars=200, ext_word_list=None)
                     rel.save()
+                    i += 1
+
+                    if i % 1000 == 0:
+                        print(f"relaciones creadas {i}")
+
             return
 
         for _ in range(options['iteraciones']):
